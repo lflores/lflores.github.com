@@ -48,7 +48,7 @@ $(document).ready(function () {
         play();
     });
 });
-var interval = null;
+var interval, totalLines;
 
 function load(month) {
     d3.json("./data/" + month + ".json", function (data) {
@@ -56,9 +56,31 @@ function load(month) {
             //I can't load data, do nothing
             return;
         }
+        totalLines = 0;
+        data.children.forEach(function (item, i) {
+            totalLines += item.size;
+        });
+        perc(data);
         chart.data(data.children);
     });
 }
+
+function perc(node) {
+    node['perc'] = node['children'].reduce(function (result, item) {
+        item['perc'] = (item['size'] / totalLines) * 100;
+        return result + (item['children'] && item['children'].length > 0 ? perc(item) : (item['size'] / totalLines) * 100);
+    }, 0);
+    //node['perc'] = node['children'] ? node['perc'] : (node['size'] / totalLines) * 100;
+    return (node['size'] / totalLines) * 100;
+}
+
+function rollup(node) {
+    node['size'] = node['children'].reduce(function (result, item) {
+        return result + (item['children'] ? rollup(item) : item['size']);
+    }, 0);
+    return node['size'];
+}
+
 
 function play() {
     interval = setInterval(function () {
