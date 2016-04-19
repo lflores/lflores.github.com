@@ -1,22 +1,23 @@
 var chart;
+var delay_play = 3000;
 $(document).ready(function () {
-
     var month;
-
     chart = new GravityBubbles({
         id: "vis",
         width: 800,
         height: 300,
         sizeById: "size",
         colorById: "perc",
+        _groupBy: "category",
         points: [0, 3, 7, 20, 50, 100],
         colors: ["#EFF3FF", "#BDD7E7", "#6BAED6", "#3182BD", "#08519C", "#08519C"],
         data: {
             tooltip: function (d) {
-                return "<b>Name:</b>{name}<br><b>Size:</b> {size}<br><b>Size of Total:</b> {perc}%";
+                return "<b>Name:</b>{name}<br>{category}<br><b>Size:</b> {size}<br><b>Size of Total:</b> {perc}%";
             },
             label: {
-                template: "{name}\n{perc}%"
+                template: "{name}",
+                autofit: true
             }
         }
     });
@@ -24,6 +25,8 @@ $(document).ready(function () {
     //Month for first time
     month = $("input[name='timeline']").val();
     load(month);
+    group = $("#group a.active").attr("id");
+    chart.groupById(group);
 
     //When month changes reload data for month
     $('input[name="timeline"]').change(function () {
@@ -38,6 +41,19 @@ $(document).ready(function () {
         $('#group a').removeClass('active');
         $(this).toggleClass('active');
         chart.groupById(group_type);
+    });
+
+    $('#autofit a').click(function () {
+        var autofit = $(this).attr('id');
+        $('#autofit a').removeClass('active');
+        $(this).toggleClass('active');
+        chart.config({
+            data: {
+                label: {
+                    autofit: autofit === 'autofit' ? true : false
+                }
+            }
+        });
     });
 
     $('button[name="play-button"]').click(function () {
@@ -88,7 +104,7 @@ function play() {
         index++;
         index = index % $("input[name='timeline']").length;
         $("input[name='timeline']").get(index).click();
-    }, 5000);
+    }, delay_play);
 }
 
 function stop() {

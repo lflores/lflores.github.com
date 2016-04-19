@@ -4,7 +4,7 @@
 <html>
 
 <head>
-    <title>Evolution Example</title>
+    <title>GravityBubbles Example</title>
     <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
@@ -17,57 +17,67 @@
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
-    <!--    <script src="../js/lineargauge.min.js"></script>-->
+    <script src="../js/lineargauge.min.js"></script>
     <link rel="stylesheet" href="../css/linear-gauge.css"></link>
-    <!--    <script src="https://rawgit.com/lflores/gravity-bubbles/master/dist/gravity-bubbles.min.js"></script>-->
-    <!--    <script src="../../dist/gravity-bubbles.min.js"></script>-->
+    <!--<script src="../../dist/gravity-bubbles.min.js"></script>-->
     <script src="../../src/js/gravity-bubbles.js"></script>
-    <link rel="stylesheet" href="css/evolution.css"></link>
+    <link rel="stylesheet" href="../css/gravity-bubbles.css"></link>
     <link rel="stylesheet" href="../css/basic-styles.css"></link>
+    <link rel="stylesheet" href="css/flare.css"></link>
     <meta name="viewport" content="width=device-width,initial-scale=1">
-
 </head>
 
 <body>
     <div id="container" class="container">
         <header>
-            <h3>Evolution example</h3>
-            <p>This example shows evolution or changes of data through time</p>
-            <form name="timeline-form">
-                <h5>Timeline:</h5>
-                <label class="active">
-                    <input type="radio" name="timeline" value="201501" checked>Ene-2015
+            <h3>Gravity Bubbles Example - "Flare" number lines comparison</h3>
+            <p>This example shows Gravity Bubble interaction and color changes. Based on flare.json data example</p>
+            <form>
+                <h5>Color Scheme:</h5>
+                <label>
+                    <input type="radio" name="color-scheme" value="blue" checked>Default
                 </label>
                 <label>
-                    <input type="radio" name="timeline" value="201502">Feb-2015
+                    <input type="radio" name="color-scheme" value="green">Green
                 </label>
                 <label>
-                    <input type="radio" name="timeline" value="201503">Mar-2015
+                    <input type="radio" name="color-scheme" value="greenred">Jim
                 </label>
                 <label>
-                    <input type="radio" name="timeline" value="201504">Apr-2015
+                    <input type="radio" name="color-scheme" value="brown">Brown
                 </label>
                 <label>
-                    <input type="radio" name="timeline" value="201505">May-2015
+                    <input type="radio" name="color-scheme" value="lightblue">Light blue
                 </label>
-                <button name="play-button" type="button" data-toggle="button" class="btn btn-default" aria-label="Left Align">
-                    <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
-                </button>
+                <div id="gauge"></div>
+            </form>
+
+            <form>
+                <h5>Resize:</h5>
+                <div id="size" class="btn-group">
+                    <a href="#" id="mini" class="btn btn-sm">Mini</a>
+                    <a href="#" id="medium" class="btn btn-sm active">Medium</a>
+                    <a href="#" id="max" class="btn btn-sm">Large</a>
+                </div>
             </form>
             <form>
                 <h5>Group By:</h5>
                 <div id="group" class="btn-group">
-                    <a href="#" id="all" class="btn btn-sm">All</a>
+                    <a href="#" id="all" class="btn btn-sm active">All</a>
                     <a href="#" id="color" class="btn btn-sm">Color</a>
-                    <a href="#" id="category" class="btn btn-sm active">Category</a>
+                    <a href="#" id="category" class="btn btn-sm">Category</a>
                     <a href="#" id="user" class="btn btn-sm">User</a>
                 </div>
             </form>
+            <ol class="breadcrumb">
+                <!--<li class="active"><a href="#">flare</a></li>-->
+            </ol>
         </header>
         <div id="main" role="main">
             <div id="description">
-                <p>Based on <a href="http://www.d3js.org">D3js</a> library, this example shows the evolution of bubbles through time, loading data in asynchronous form, under demand. Or you can push play to automate the action.</p>
-                <p>The <b>size of bubbles</b> is the <b>size of each node</b>, and <b>color</b> is the <b>percentage of total</b> that cover this node.</p>
+                <p>Based on common tree data "flare", and using <a href="http://www.d3js.org">D3js</a> library, this example shows bubbles grouped in center (force), like earth gravity, with distinct sizes and colors.</p>
+                <p>The <b>size of bubbles</b> is the <b>size of each node</b>, and <b>color</b> is the <b>percentage of total</b> that cover this node. If you <b>click in a bubble</b>, you can do a <b>drilldown</b> and dive into data tree</p>
+                <p>Also, you have a breadcrumb to drill up data</p>
             </div>
             <div id="vis"></div>
         </div>
@@ -77,11 +87,12 @@
         </footer>
     </div>
 
-    <script type="text/javascript" src="js/evolution.js"></script>
+    <script type="text/javascript" src="js/flare.js"></script>
     <!--[if lt IE 7 ]>
     <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
     <script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
   <![endif]-->
+
 </body>
 
 </html>
