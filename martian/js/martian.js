@@ -181,7 +181,6 @@ $(document).ready(function () {
         $('input:radio[name="resolution"]').attr('checked', 'checked');
     }
 
-
     // fix the weird css error
     $('body').css("height", "2000px");
 });
