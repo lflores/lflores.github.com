@@ -115,7 +115,8 @@ $(document).ready(function () {
                     return "<b>Name:</b>{name}<br><b>Size:</b> {size}<br><b>Size of Total:</b> {perc}%";
                 },
                 label: {
-                    template: "{name}\n{perc}%"
+                    template: "{name}\n{perc}%",
+					show: true
                 },
                 onclick: function (d, circle) {
                     if (d.hasOwnProperty("children")) {
