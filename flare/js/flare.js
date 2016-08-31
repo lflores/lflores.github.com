@@ -99,6 +99,7 @@ $(document).ready(function () {
             //                        break;
             //                }
             //chart.resize();
+			
             return false;
         });
 
