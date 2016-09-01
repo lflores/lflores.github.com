@@ -118,6 +118,7 @@ $(document).ready(function () {
             },
             label: {
                 template: "{name}\n{perc}%\n{channel}",
+                //show: false,
                 autofit: true
             },
             onclick: function (d, circle) {
@@ -180,6 +181,7 @@ $(document).ready(function () {
     if (mobileCheck) {
         $('input:radio[name="resolution"]').attr('checked', 'checked');
     }
+
 
     // fix the weird css error
     $('body').css("height", "2000px");

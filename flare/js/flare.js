@@ -99,7 +99,6 @@ $(document).ready(function () {
             //                        break;
             //                }
             //chart.resize();
-			
             return false;
         });
 
@@ -116,8 +115,7 @@ $(document).ready(function () {
                     return "<b>Name:</b>{name}<br><b>Size:</b> {size}<br><b>Size of Total:</b> {perc}%";
                 },
                 label: {
-                    template: "{name}\n{perc}%",
-					show: true
+                    template: "{name}\n{perc}%"
                 },
                 onclick: function (d, circle) {
                     if (d.hasOwnProperty("children")) {
