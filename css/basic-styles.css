@@ -64,7 +64,7 @@ form .btn-group {
     margin-left: 5px;
     display: inline-block;
     border: 1px #ccc solid;
-    border-radius: 10px;
+    border-radius: 0px;
 }
 
 footer {
