@@ -18,24 +18,24 @@
 
 // Configure our app
 angular.module('editor', ['editor.login', 'editor.rename', 'editor.drive', 'ngRoute', 'ngMaterial', 'ui.codemirror'])
-  .constant('apiKey', null)
-  .constant('clientId', '709207149709-fadikftqudacphtr4pq5mu80s6tqklrb.apps.googleusercontent.com')
-  .constant('applicationId', '709207149709')
-  .constant('scope', ['email', 'profile', 'https://www.googleapis.com/auth/drive', 'https://www.googleapis.com/auth/drive.install'])
-  .constant('loadApis', {
-    'drive' : 'v2'
-  })
-  .config(function ($routeProvider) {
-    $routeProvider
-      .when('/edit/:fileId?', {
-        templateUrl: 'app/main/main.html',
-        controller: 'MainCtrl',
-        controllerAs: 'ctrl'
-      })
-      .otherwise({
-        redirectTo: function() {
-          console.log("Otherwise...");
-          return '/edit/';
-        }
-      });
-  });
+    .constant('apiKey', null)
+    .constant('clientId', '825440913711-gjoh3rbtrsnt5mapedf9dn2kumv247m7.apps.googleusercontent.com')
+    .constant('applicationId', '825440913711')
+    .constant('scope', ['email', 'profile', 'https://www.googleapis.com/auth/drive', 'https://www.googleapis.com/auth/drive.install'])
+    .constant('loadApis', {
+        'drive': 'v2'
+    })
+    .config(function ($routeProvider) {
+        $routeProvider
+            .when('/edit/:fileId?', {
+                templateUrl: 'app/main/main.html',
+                controller: 'MainCtrl',
+                controllerAs: 'ctrl'
+            })
+            .otherwise({
+                redirectTo: function () {
+                    console.log("Otherwise...");
+                    return '/edit/';
+                }
+            });
+    });
