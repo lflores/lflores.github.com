@@ -1,0 +1,84 @@
+<md-sidenav class="md-sidenav-left" md-component-id="left" md-whiteframe="4" tabindex="-1">
+    <md-toolbar class="md-theme-indigo _md _md-toolbar-transitions">
+        <h1 class="md-toolbar-tools">Disabled Backdrop</h1>
+    </md-toolbar>
+    <md-content layout-margin="" class="layout-margin _md">
+        <p>
+            This sidenav is not showing any backdrop, where users can click on it, to close the sidenav.
+        </p>
+        <!--
+<button class="md-accent md-button md-ink-ripple" type="button" ng-click="toggleLeft()"><span class="ng-scope">
+          Close this Sidenav
+        </span>
+</button>
+-->
+        <md-button class="md-accent md-button md-ink-ripple" aria-label="Settings" ng-click="toggleLeft()">
+            <span class="ng-scope">Close this Sidenav</span>
+        </md-button>
+    </md-content>
+</md-sidenav>
+<md-content flex="" layout="column" tabindex="-1">
+    <md-toolbar class="md-hue-2">
+        <div class="md-toolbar-tools">
+            <md-button class="md-icon-button" aria-label="Settings" ng-click="toggleLeft()">
+                <i class="material-icons">menu</i>
+            </md-button>
+            <h2>
+                <a href="#"><i class="material-icons">spa</i>
+          <span>E-Invoice</span>
+                    </a>
+        </h2>
+            <span flex></span>
+            <md-button class="md-icon-button" aria-label="Favorite" ng-click="toggleLeft()">
+                <i class="material-icons">home</i>
+            </md-button>
+            <md-button class="md-icon-button" aria-label="More">
+                <i class="material-icons">toc</i>
+            </md-button>
+            <google-login></google-login>
+        </div>
+    </md-toolbar>
+    <div ng-cloak="" class="tabsdemoDynamicHeight" ng-app="MyApp">
+        <md-content>
+            <md-tabs md-dynamic-height="" md-border-bottom="">
+                <md-tab label="Inbox">
+                    <md-content class="md-padding">
+                        <h1 class="md-display-2">Tab One</h1>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis ante augue. Phasellus volutpat neque ac dui mattis vulputate. Etiam consequat aliquam cursus. In sodales pretium ultrices. Maecenas lectus est, sollicitudin consectetur felis nec, feugiat ultricies mi.</p>
+                        <md-list ng-controller="ListCtrl" ng-cloak="" class="listdemoListControls" ng-app="MyApp">
+                            <md-subheader class="md-no-sticky">Clickable Items with Secondary Controls</md-subheader>
+                            <md-list-item ng-click="navigateTo(setting.extraScreen, $event)" ng-repeat="setting in settings">
+                                <md-icon md-font-icon="{{setting.icon}}" aria-label="{{setting.icon}}">{{setting.icon}}</md-icon>
+                                <p> {{ setting.name }} </p>
+                                <md-switch class="md-secondary" ng-model="setting.enabled"></md-switch>
+                            </md-list-item>
+                        </md-list>
+                    </md-content>
+                </md-tab>
+                <md-tab label="Archived">
+                    <md-content class="md-padding">
+                        <h1 class="md-display-2">Tab Two</h1>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis ante augue. Phasellus volutpat neque ac dui mattis vulputate. Etiam consequat aliquam cursus. In sodales pretium ultrices. Maecenas lectus est, sollicitudin consectetur felis nec, feugiat ultricies mi. Aliquam erat volutpat. Nam placerat, tortor in ultrices porttitor, orci enim rutrum enim, vel tempor sapien arcu a tellus. Vivamus convallis sodales ante varius gravida. Curabitur a purus vel augue ultrices ultricies id a nisl. Nullam malesuada consequat diam, a facilisis tortor volutpat et. Sed urna dolor, aliquet vitae posuere vulputate, euismod ac lorem. Sed felis risus, pulvinar at interdum quis, vehicula sed odio. Phasellus in enim venenatis, iaculis tortor eu, bibendum ante. Donec ac tellus dictum neque volutpat blandit. Praesent efficitur faucibus risus, ac auctor purus porttitor vitae. Phasellus ornare dui nec orci posuere, nec luctus mauris semper.</p>
+                        <p>Morbi viverra, ante vel aliquet tincidunt, leo dolor pharetra quam, at semper massa orci nec magna. Donec posuere nec sapien sed laoreet. Etiam cursus nunc in condimentum facilisis. Etiam in tempor tortor. Vivamus faucibus egestas enim, at convallis diam pulvinar vel. Cras ac orci eget nisi maximus cursus. Nunc urna libero, viverra sit amet nisl at, hendrerit tempor turpis. Maecenas facilisis convallis mi vel tempor. Nullam vitae nunc leo. Cras sed nisl consectetur, rhoncus sapien sit amet, tempus sapien.</p>
+                        <p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>
+                    </md-content>
+                </md-tab>
+                <md-tab label="Unclasiffied">
+                    <md-content class="md-padding">
+                        <h1 class="md-display-2">Tab Three</h1>
+                        <p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>
+                    </md-content>
+                </md-tab>
+            </md-tabs>
+        </md-content>
+    </div>
+
+</md-content>
+<!--
+<header></header>
+<div class="content">
+    <side-menu></side-menu>
+    <main-tabs></main-tabs>
+</div>
+<footer></footer>
+-->

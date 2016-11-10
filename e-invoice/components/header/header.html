@@ -1,0 +1,21 @@
+<div class="collapse navbar-collapse">
+    <ul class="nav navbar-nav">
+        <li>
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html"><i class="glyphicon glyphicon-leaf"></i>&nbsp;Invoice</a>
+        </li>
+
+    </ul>
+
+    <ul class="nav navbar-nav navbar-right">
+        <li>
+            <a id="signInButton" class="animated-hide" ng-controller="GoogleLoginController as glc" ng-click="glc.googleLogin()" ng-hide="logged"></a>
+        </li>
+    </ul>
+    <!-- /.navbar-header -->
+</div>

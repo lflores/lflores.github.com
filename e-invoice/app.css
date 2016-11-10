@@ -1,0 +1,156 @@
+/* app css stylesheet */
+
+.menu {
+    list-style: none;
+    border-bottom: 0.1em solid black;
+    margin-bottom: 2em;
+    padding: 0 0 0.5em;
+}
+
+.menu:before {
+    content: "[";
+}
+
+.menu:after {
+    content: "]";
+}
+
+.menu > li {
+    display: inline;
+}
+
+.menu > li + li:before {
+    content: "|";
+    padding-right: 0.3em;
+}
+
+form.tab-form-demo .tab-pane {
+    margin: 20px 20px;
+    /*border: 1px red dashed;*/
+}
+
+.content {
+    /*border: 1px blue dashed;*/
+    height: 320px;
+}
+
+side-menu {
+    /*border: 1px green dashed;*/
+    width: 220px;
+    display: inline-block;
+    background-color: rgba(0, 128, 0, 0.17);
+    height: 100%;
+    float: left;
+}
+
+footer {
+    position: absolute;
+    bottom: 0px;
+}
+
+main-tabs {
+    /*border: 1px red dashed;*/
+    display: inline-block;
+    height: 100%;
+    width: 80%;
+}
+
+.navbar-brand {
+    color: green!important;
+}
+
+.navbar-brand .glyphicon {
+    color: inherit;
+}
+
+
+/** side menu */
+
+.sidebar-nav > ul.nav > li > a > span.glyphicon {
+    /*    border: 1px red dashed;*/
+    float: right;
+}
+
+.sidebar-nav > ul.nav > li > ul {
+    height: 0px;
+    -webkit-transition: height 0.8s ease-in-out;
+    -moz-transition: height 0.8s ease-in-out;
+    -ms-transition: height 0.8s ease-in-out;
+    transition: height 0.8s ease-in-out;
+    overflow-y: hidden;
+    /*    border: 1px red dashed;*/
+}
+
+.sidebar-nav > ul.nav > li.active > ul {
+    height: 270px;
+    -webkit-transition: height 0.8s ease-in-out;
+    -moz-transition: height 0.8s ease-in-out;
+    -ms-transition: height 0.8s ease-in-out;
+    transition: height 0.8s ease-in-out;
+    /*    border: 1px red dashed;*/
+}
+
+
+/** Nav Tabs */
+
+.tab-content {
+    padding: 10px;
+    /*border: 1px red dashed;*/
+}
+
+google-login {
+    /*    width: 120px;*/
+    /*    height: 50px;*/
+    /*    border: 1px red dashed;*/
+    padding: 0px;
+}
+
+#signInButton {
+    /*
+    display: block;
+    margin: 0px;
+    padding: 0px;
+    width: 120px;
+    height: 40px;
+    background-image: url('resources/images/Red-signin_Google_base_44dp.png');
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+*/
+    /*    border: 1px green dashed;*/
+    transition: all linear 0.5s;
+}
+
+#signInButton > button {
+    transition: all linear 0.5s;
+}
+
+.md-button.google-sign-in {
+    transition: all 500ms ease-in-out;
+    background-image: url(resources/images/google-sign-in.png);
+    background-position: center;
+    background-size: cover;
+    border-radius: 3px;
+    min-height: 25px;
+    min-width: 100px;
+    width: 100px;
+    height: 25px;
+}
+
+#signInButton >button.ng-hide {
+    line-height: 0px;
+    opacity: 0px;
+}
+
+#user-info {
+    transition: all linear 0.5s;
+}
+
+#user-info.ng-hide {
+    line-height: 0px;
+}
+
+#user-info > img {
+    height: 30px;
+    border-radius: 50%;
+}
