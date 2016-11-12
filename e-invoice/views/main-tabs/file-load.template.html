@@ -1,1 +1,9 @@
-<p>Hola File Load Component</p>
+<md-button class="md-icon-button" aria-label="Favorite" ng-click="refresh()">
+    <i class="material-icons">autorenew</i>
+</md-button>
+<md-list ng-cloak="" class="listdemoListControls">
+    <md-list-item ng-repeat="file in list" class="md-2-line">
+        <md-icon md-svg-src="{{file.iconLink}}" aria-label="{{file.name}}"></md-icon>
+        <p>{{ file.name }}</p>
+    </md-list-item>
+</md-list>

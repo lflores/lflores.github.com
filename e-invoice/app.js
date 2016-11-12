@@ -51,10 +51,32 @@ var invoiceApp = angular.module('myApp', ['ngMaterial', 'ngMessages', 'angular-g
 
     }]);
 
-invoiceApp.run(['GAuth', 'GApi', 'GData', '$rootScope',
-    function (GAuth, GApi, GData, $routeProvider, $rootScope) {
+invoiceApp.factory("loginService", function (GAuth, $rootScope) {
+    return {
+        userInfo: null,
+        getUserInfo: function () {
+            return this.userInfo;
+        },
+        setUserInfo: function (user) {
+            this.userInfo = user;
+            $rootScope.$broadcast('evento', [1, 2, 3]);
+        }
+    };
+});
 
-        //$rootScope.gdata = GData;
+invoiceApp.run(['GAuth', 'GApi', 'GData', '$rootScope', 'loginService',
+    function (GAuth, GApi, GData, $rootScope, loginService) {
+
+        var SCOPE = [
+            'email',
+            'profile',
+            'https://www.googleapis.com/auth/drive',
+            'https://www.googleapis.com/auth/drive.file',
+            'https://www.googleapis.com/auth/drive.appdata',
+            'https://www.googleapis.com/auth/drive.metadata'
+        ]
+
+        $rootScope.gdata = GData;
 
         var CLIENT = '825440913711-gjoh3rbtrsnt5mapedf9dn2kumv247m7.apps.googleusercontent.com';
         var BASE = 'https://myGoogleAppEngine.appspot.com/_ah/api';
@@ -64,7 +86,7 @@ invoiceApp.run(['GAuth', 'GApi', 'GData', '$rootScope',
 
         GAuth.setClient(CLIENT)
             // default scope is only https://www.googleapis.com/auth/userinfo.email
-        GAuth.setScope('email profile https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/drive.file https://www.googleapis.com/auth/drive.appdata https://www.googleapis.com/auth/drive.metadata');
+        GAuth.setScope(SCOPE.join(" "));
 
         // load the auth api so that it doesn't have to be loaded asynchronously
         // when the user clicks the 'login' button.
