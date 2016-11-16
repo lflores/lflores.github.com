@@ -193,8 +193,8 @@ Shown below is a karma-configuration file (`karma.conf.js`) sample that may be a
 module.exports = function(config) {
 
   var SRC = [
-    'src/myApp/**/*.js',
-    'test/myApp/**/*.spec.js'
+    'src/e-invoice/**/*.js',
+    'test/e-invoice/**/*.spec.js'
   ];
 
   var LIBS = [

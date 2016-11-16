@@ -1,7 +1,7 @@
 'use strict';
 
 angular
-    .module('myApp')
+    .module('e-invoice')
     .component('classifiedFiles', {
         templateUrl: 'views/main-tabs/classified-files.template.html',
         controller: function ($scope, $element, $attrs) {

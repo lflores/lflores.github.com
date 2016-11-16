@@ -1,8 +1,8 @@
 'use strict';
 
-describe('myApp.inbox module', function () {
+describe('e-invoice.inbox module', function () {
 
-    beforeEach(module('myApp.inbox'));
+    beforeEach(module('e-invoice.inbox'));
 
     describe('inbox controller', function () {
 

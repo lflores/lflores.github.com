@@ -16,7 +16,7 @@ npm install angular-aria
 Then add `ngAria` as a dependency for your app:
 
 ```javascript
-angular.module('myApp', [require('angular-aria')]);
+angular.module('e-invoice', [require('angular-aria')]);
 ```
 
 ### bower
@@ -34,7 +34,7 @@ Add a `<script>` to your `index.html`:
 Then add `ngAria` as a dependency for your app:
 
 ```javascript
-angular.module('myApp', ['ngAria']);
+angular.module('e-invoice', ['ngAria']);
 ```
 
 ## Documentation

@@ -1,4 +1,4 @@
-angular.module('myApp.demo', ['ngRoute'])
+angular.module('e-invoice.demo', ['ngRoute'])
     .controller('AlertDemoCtrl', function ($scope) {
         $scope.alerts = [
             {

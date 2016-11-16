@@ -1,15 +1,15 @@
 //'use strict';
 //
 //// Declare app level module which depends on views, and components
-//angular.module('myApp', [
+//angular.module('e-invoice', [
 //  'ngRoute',
 //    'ui.bootstrap',
-//    'myApp.inbox',
-//    'myApp.view1',
-//    'myApp.view2',
-//    'myApp.version',
-//    'myApp.demo',
-//    'myApp.dashboard',
+//    'e-invoice.inbox',
+//    'e-invoice.view1',
+//    'e-invoice.view2',
+//    'e-invoice.version',
+//    'e-invoice.demo',
+//    'e-invoice.dashboard',
 //]).
 //config(['$locationProvider', '$routeProvider', function ($locationProvider, $routeProvider) {
 //    $locationProvider.hashPrefix('!');
@@ -27,7 +27,7 @@
 //});
 
 'use strict';
-var invoiceApp = angular.module('myApp', ['ngMaterial', 'ngMessages', 'angular-google-gapi', 'myApp.dashboard'])
+var invoiceApp = angular.module('e-invoice', ['ngMaterial', 'ngMessages', 'angular-google-gapi', 'e-invoice.dashboard'])
     .config(['$locationProvider', '$routeProvider', '$mdThemingProvider', function ($locationProvider, $routeProvider, $mdThemingProvider) {
         $locationProvider.hashPrefix('!');
 
@@ -35,15 +35,19 @@ var invoiceApp = angular.module('myApp', ['ngMaterial', 'ngMessages', 'angular-g
             redirectTo: '/dashboard'
         });
 
+        $mdThemingProvider.theme('default')
+            .primaryPalette('green')
+            .accentPalette('blue-grey');
+
         // Extend the red theme with a different color and make the contrast color black instead of white.
         // For example: raised button text will be black instead of white.
-        var neonRedMap = $mdThemingProvider.extendPalette('red', {
-            '500': '#ff0000',
-            'contrastDefaultColor': 'dark'
-        });
+        //        var neonRedMap = $mdThemingProvider.extendPalette('red', {
+        //            '500': '#ff0000',
+        //            'contrastDefaultColor': 'dark'
+        //        });
 
         // Register the new color palette map with the name <code>neonRed</code>
-        $mdThemingProvider.definePalette('neonRed', neonRedMap);
+        //$mdThemingProvider.definePalette('neonRed', neonRedMap);
 
         // Use that theme for the primary intentions
         //        $mdThemingProvider.theme('default')
@@ -59,7 +63,12 @@ invoiceApp.factory("loginService", function (GAuth, $rootScope) {
         },
         setUserInfo: function (user) {
             this.userInfo = user;
-            $rootScope.$broadcast('evento', [1, 2, 3]);
+            this.loadFolder();
+        },
+
+        loadFolder: function () {
+
+            $rootScope.$broadcast('start-app', this.userInfo);
         }
     };
 });
@@ -68,7 +77,7 @@ invoiceApp.run(['GAuth', 'GApi', 'GData', '$rootScope', 'loginService',
     function (GAuth, GApi, GData, $rootScope, loginService) {
 
         var SCOPE = [
-            'email',
+            //'email',
             'profile',
             'https://www.googleapis.com/auth/drive',
             'https://www.googleapis.com/auth/drive.file',
@@ -79,7 +88,7 @@ invoiceApp.run(['GAuth', 'GApi', 'GData', '$rootScope', 'loginService',
         $rootScope.gdata = GData;
 
         var CLIENT = '825440913711-gjoh3rbtrsnt5mapedf9dn2kumv247m7.apps.googleusercontent.com';
-        var BASE = 'https://myGoogleAppEngine.appspot.com/_ah/api';
+        //var BASE = 'https://myGoogleAppEngine.appspot.com/_ah/api';
 
         //GApi.load('myApiName', 'v1', BASE);
         GApi.load('drive', 'v3'); // for google api (https://developers.google.com/apis-explorer/)
@@ -95,29 +104,42 @@ invoiceApp.run(['GAuth', 'GApi', 'GData', '$rootScope', 'loginService',
 
         // or just call checkAuth, which in turn does load the oauth api.
         // if you do that, GAuth.load(); is unnecessary
-        GAuth.checkAuth().then(
-            function (user) {
+        GAuth.login().then(function (user) {
                 console.log(user.name + ' is logged in');
+                loginService.setUserInfo(user);
             },
             function () {
-                console.log('user is logged out');
-            }
-        );
+                console.log('login failed');
+            });
+
+        //        GAuth.checkAuth().then(
+        //            function (user) {
+        //                console.log(user.name + ' is logged in');
+        //            },
+        //            function () {
+        //                //console.log('user is logged out');
+        //                GAuth.login().then(function (user) {
+        //                    console.log(user.name + ' is logged in');
+        //                    loginService.setUserInfo(user);
+        //                    //$state.go('webapp.home'); // action after the user have validated that
+        //                    // your application can access their Google account
+        //                }, function () {
+        //                    console.log('login failed');
+        //                });
+        //            }
+        //        );
     }
 ]);
-invoiceApp.controller("AppController", function ($scope, $mdSidenav) {
+invoiceApp.controller("AppController", function ($scope, $mdSidenav, $rootScope) {
     $scope.toggleLeft = function () {
         return $mdSidenav('left').toggle();
     }
-});
-
-invoiceApp.controller("GoogleLoginController", function ($scope, $mdSidenav) {
-    //alert("Hola!");
-    $scope.logged = false;
-    this.googleLogin = function () {
-        //alert("Login click!");
-        $scope.logged = !$scope.logged;
-    }
+    $scope.showDetail = true;
+    $scope.toggleDetail = function () {
+        $scope.showDetail = !$scope.showDetail;
+        $rootScope.$broadcast('toggleDetail', $scope.showDetail);
+    };
+    $rootScope.$broadcast('toggleDetail', $scope.showDetail);
 });
 
 invoiceApp.controller("SideNavController", function ($scope, $mdSidenav) {

@@ -1,7 +1,7 @@
 'use strict';
 
 angular
-    .module('myApp')
+    .module('e-invoice')
     .component('footer', {
         templateUrl: 'components/footer/footer.html',
         controller: function ($scope, $element, $attrs) {

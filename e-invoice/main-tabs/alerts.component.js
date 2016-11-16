@@ -1,7 +1,7 @@
 'use strict';
 
 angular
-    .module('myApp').component('alerts', {
+    .module('e-invoice').component('alerts', {
         templateUrl: 'views/main-tabs/alerts.template.html',
         controller: function ($scope, $element, $attrs) {
             $scope.alerts = [

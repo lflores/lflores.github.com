@@ -17,7 +17,7 @@ npm install angular-animate
 Then add `ngAnimate` as a dependency for your app:
 
 ```javascript
-angular.module('myApp', [require('angular-animate')]);
+angular.module('e-invoice', [require('angular-animate')]);
 ```
 
 ### bower
@@ -35,7 +35,7 @@ Then add a `<script>` to your `index.html`:
 Then add `ngAnimate` as a dependency for your app:
 
 ```javascript
-angular.module('myApp', ['ngAnimate']);
+angular.module('e-invoice', ['ngAnimate']);
 ```
 
 ## Documentation

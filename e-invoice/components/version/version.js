@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('myApp.version', [
-  'myApp.version.interpolate-filter',
-  'myApp.version.version-directive'
+angular.module('e-invoice.version', [
+  'e-invoice.version.interpolate-filter',
+  'e-invoice.version.version-directive'
 ])
 
 .value('version', '0.1');

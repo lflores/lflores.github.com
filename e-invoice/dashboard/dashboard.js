@@ -1,5 +1,5 @@
 'use strict';
-angular.module('myApp.dashboard', ['ngRoute'])
+angular.module('e-invoice.dashboard', ['ngRoute'])
 
 .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/dashboard', {

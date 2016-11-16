@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
+<!--[if lt IE 7]>      <html lang="en" ng-app="e-invoice" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" ng-app="e-invoice" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" ng-app="e-invoice" class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!-->
-<html lang="en" ng-app="myApp" class="no-js">
+<html lang="en" ng-app="e-invoice" class="no-js">
 <!--<![endif]-->
 
 <head>
@@ -38,17 +38,16 @@
     <script src="bower_components/angular-messages/angular-messages.min.js" type="text/javascript"></script>
     <script src="bower_components/angular-material/angular-material.min.js" type="text/javascript"></script>
     <script src="bower_components/angular-google-gapi/dist/angular-google-gapi.js" type="text/javascript"></script>
-
+    <script src="bower_components/angular-route/angular-route.js"></script>
 </head>
 
-<body ng-app="myApp" class="ng-scope" ng-controller="AppController">
+<body ng-app="e-invoice" class="ng-scope" ng-controller="AppController">
     <!--    <div ng-view></div>-->
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
   <![endif]-->
 
     <div ng-view layout="row"></div>
-    <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="app.js"></script>
     <script src="dashboard/dashboard.js"></script>
     <script src="inbox/inbox.js"></script>

@@ -1,7 +1,7 @@
 'use strict';
 
 angular
-    .module('myApp')
+    .module('e-invoice')
     .component('mainTabs', {
         templateUrl: 'components/main-tabs/main-tabs.html',
         controller: function ($scope, $element, $attrs) {

@@ -1,7 +1,7 @@
 'use strict';
 
 angular
-    .module('myApp')
+    .module('e-invoice')
     .component('header', {
         templateUrl: 'components/header/header.html',
         controller: function ($scope, $element, $attrs) {

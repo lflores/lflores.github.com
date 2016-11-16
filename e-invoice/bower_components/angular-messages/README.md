@@ -17,7 +17,7 @@ npm install angular-messages
 Then add `ngMessages` as a dependency for your app:
 
 ```javascript
-angular.module('myApp', [require('angular-messages')]);
+angular.module('e-invoice', [require('angular-messages')]);
 ```
 
 ### bower
@@ -35,7 +35,7 @@ Add a `<script>` to your `index.html`:
 Then add `ngMessages` as a dependency for your app:
 
 ```javascript
-angular.module('myApp', ['ngMessages']);
+angular.module('e-invoice', ['ngMessages']);
 ```
 
 ## Documentation

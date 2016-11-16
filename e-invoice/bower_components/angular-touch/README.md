@@ -17,7 +17,7 @@ npm install angular-touch
 Then add `ngTouch` as a dependency for your app:
 
 ```javascript
-angular.module('myApp', [require('angular-touch')]);
+angular.module('e-invoice', [require('angular-touch')]);
 ```
 
 ### bower
@@ -35,7 +35,7 @@ Add a `<script>` to your `index.html`:
 Then add `ngTouch` as a dependency for your app:
 
 ```javascript
-angular.module('myApp', ['ngTouch']);
+angular.module('e-invoice', ['ngTouch']);
 ```
 
 ## Documentation

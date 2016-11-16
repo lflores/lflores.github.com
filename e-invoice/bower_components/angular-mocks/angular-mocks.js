@@ -2374,8 +2374,8 @@ angular.module('ngMockE2E', ['ng']).config(['$provide', function($provide) {
  * on the `ngMockE2E` and your application modules and defines the fake backend:
  *
  * ```js
- *   var myAppDev = angular.module('myAppDev', ['myApp', 'ngMockE2E']);
- *   myAppDev.run(function($httpBackend) {
+ *   var e-invoiceDev = angular.module('e-invoiceDev', ['e-invoice', 'ngMockE2E']);
+ *   e-invoiceDev.run(function($httpBackend) {
  *     var phones = [{name: 'phone1'}, {name: 'phone2'}];
  *
  *     // returns the current list of phones
@@ -2395,11 +2395,11 @@ angular.module('ngMockE2E', ['ng']).config(['$provide', function($provide) {
  * Afterwards, bootstrap your app with this new module.
  *
  * ## Example
- * <example name="httpbackend-e2e-testing" module="myAppE2E" deps="angular-mocks.js">
+ * <example name="httpbackend-e2e-testing" module="e-invoiceE2E" deps="angular-mocks.js">
  * <file name="app.js">
- *   var myApp = angular.module('myApp', []);
+ *   var e-invoice = angular.module('e-invoice', []);
  *
- *   myApp.controller('main', function($http) {
+ *   e-invoice.controller('main', function($http) {
  *     var ctrl = this;
  *
  *     ctrl.phones = [];
@@ -2424,9 +2424,9 @@ angular.module('ngMockE2E', ['ng']).config(['$provide', function($provide) {
  *   });
  * </file>
  * <file name="e2e.js">
- *   var myAppDev = angular.module('myAppE2E', ['myApp', 'ngMockE2E']);
+ *   var e-invoiceDev = angular.module('e-invoiceE2E', ['e-invoice', 'ngMockE2E']);
  *
- *   myAppDev.run(function($httpBackend) {
+ *   e-invoiceDev.run(function($httpBackend) {
  *     var phones = [{name: 'phone1'}, {name: 'phone2'}];
  *
  *     // returns the current list of phones
@@ -2992,7 +2992,7 @@ angular.mock.$RootScopeDecorator = ['$delegate', function($delegate) {
    * Example of what a typical jasmine tests looks like with the inject method.
    * ```js
    *
-   *   angular.module('myApplicationModule', [])
+   *   angular.module('e-invoicelicationModule', [])
    *       .value('mode', 'app')
    *       .value('version', 'v1.0.1');
    *
@@ -3001,7 +3001,7 @@ angular.mock.$RootScopeDecorator = ['$delegate', function($delegate) {
    *
    *     // You need to load modules that you want to test,
    *     // it loads only the "ng" module by default.
-   *     beforeEach(module('myApplicationModule'));
+   *     beforeEach(module('e-invoicelicationModule'));
    *
    *
    *     // inject() is used to inject arguments of all given functions

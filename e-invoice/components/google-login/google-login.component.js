@@ -1,7 +1,7 @@
 'use strict';
 
 angular
-    .module('myApp')
+    .module('e-invoice')
     .component('googleLogin', {
         templateUrl: 'components/google-login/google-login.template.html',
         controller: function ($scope, GAuth, $element, $attrs, loginService) {
@@ -18,22 +18,7 @@ angular
             $scope.signIn = function (user) {
                 $scope.signedIn = user != null;
                 $scope.userInfo = user;
-
             }
-
-            //            $scope.signedIn = function () {
-            //                return loginService.getUserInfo() != null;
-            //            }
-            //            $scope.userInfo = function () {
-            //                return loginService.getUserInfo();
-            //            }
-
-            //            $scope.$watch(loginService.userInfo, function (userInfo) {
-            //                if (typeof userInfo != 'undefined') {
-            //                    $scope.signedIn = true;
-            //                    $scope.userInfo = userInfo;
-            //                }
-            //            });
 
             // Start function in this example only renders the sign in button.
             $scope.start = function () {
@@ -42,5 +27,9 @@ angular
 
             // Call start function on load.
             $scope.start();
+
+            $scope.$on("start-app", function () {
+                $scope.signIn(loginService.getUserInfo());
+            });
         }
     });

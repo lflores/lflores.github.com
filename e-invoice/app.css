@@ -106,13 +106,14 @@ google-login {
 }
 
 google-login {
-    width: 150px;
+    width: 100px;
     height: 35px;
     /*border: 1px red dashed;*/
 }
 
 .md-button.google-sign-in {
     position: absolute;
+    opacity: 1;
     transition: all .5s ease-in-out;
     background-image: url(resources/images/google-sign-in.png);
     background-position: center;
@@ -120,6 +121,7 @@ google-login {
     border-radius: 3px;
     min-width: 100px;
     min-height: 25px;
+    float: right;
 }
 
 .md-button.google-sign-in.ng-hide {
@@ -131,6 +133,7 @@ google-login {
 #user-info {
     transition: all linear .5s;
     opacity: 0;
+    float: right;
 }
 
 #user-info.signedIn {
@@ -141,4 +144,49 @@ google-login {
     height: 30px;
     width: 30px;
     border-radius: 50%;
+}
+
+file-load md-list {
+    width: 100%;
+    height: 500px;
+    overflow-y: scroll;
+    float: left;
+    transition: width 500ms ease-in-out;
+}
+
+file-load md-card {
+    width: 0%;
+    height: 500px;
+    transition: all 500ms ease-in-out;
+    overflow: hidden;
+    opacity: 0;
+    /*display: inline-block;*/
+}
+
+file-load md-list.detail {
+    width: 40%;
+}
+
+file-load md-card.detail {
+    width: 60%;
+    opacity: 1;
+}
+
+file-load md-card md-card-title {
+    /*    border: 1px red dashed;*/
+}
+
+file-load md-card md-card-content {
+    box-shadow: 0px 3px rgb(189, 189, 189);
+    overflow-y: scroll;
+    margin-top: 43px;
+}
+
+file-load md-card md-card-content .md-media-lg {
+    border: 1px rgb(189, 189, 189) inset;
+}
+
+file-load md-card md-card-content .md-media-lg img {
+    display: block;
+    margin: auto;
 }
