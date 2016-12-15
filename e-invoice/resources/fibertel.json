@@ -1,0 +1,7 @@
+{
+    name: "Fibertel",
+    match: "^([\d\,]*)\n(\d{2}-\d{2}-\d{4})\n(\d*)\nCablevision[\.\w\n\s\(\)-\\,°]*(Fibertel)",
+    importe: "$1",
+    vencimiento: "$2",
+    clientId: "$3"
+}

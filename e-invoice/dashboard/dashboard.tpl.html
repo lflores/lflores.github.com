@@ -1,0 +1,126 @@
+<md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
+    <md-toolbar class="md-tall md-hue-2">
+        <div layout="column" class="user-info md-toolbar-tools-bottom inset">
+            <span class="picture md-icon-button" aria-label="Defalt Photo" ng-class="!userInfo?'':'signedIn'">
+                <md-icon>account_circle</md-icon>
+            </span>
+            <span class="picture md-icon-button" aria-label="User Photo" ng-class="userInfo?'':'signedIn'">
+                <img ng-src="{{userInfo.picture}}"/>
+                <div>{{userInfo.name}}</div>
+                <div>{{userInfo.email}}</div>
+            </span>
+        </div>
+        <!--      <md-icon md-svg-src="{{ 'http://localhost:8010/resources/images/filetype/icon_10_excel_list.png' }}" aria-label="Insert Drive Icon"></md-icon>-->
+    </md-toolbar>
+    <md-list>
+        <md-item ng-repeat="item in menu">
+            <a>
+                <md-item-content md-ink-ripple layout="row" layout-align="start center">
+                    <div class="inset">
+                        <ng-md-icon icon="{{item.icon}}"></ng-md-icon>
+                    </div>
+                    <div class="inset">{{item.title}}
+                    </div>
+                </md-item-content>
+            </a>
+        </md-item>
+        <md-divider></md-divider>
+        <md-subheader>Management</md-subheader>
+        <md-item ng-repeat="item in admin">
+            <a>
+                <md-item-content md-ink-ripple layout="row" layout-align="start center">
+                    <div class="inset">
+                        <ng-md-icon icon="{{item.icon}}"></ng-md-icon>
+                    </div>
+                    <div class="inset">{{item.title}}
+                    </div>
+                </md-item-content>
+            </a>
+        </md-item>
+    </md-list>
+</md-sidenav>
+<div layout="column" class="relative" layout-fill role="main">
+    <!--
+<md-button class="md-fab md-fab-bottom-right" aria-label="Add" ng-click="showAdd($event)">
+    <ng-md-icon icon="add"></ng-md-icon>
+</md-button>
+-->
+    <md-toolbar ng-show="!showSearch">
+        <div class="md-toolbar-tools">
+            <md-button ng-click="toggleSidenav('left')" hide-gt-md aria-label="Menu">
+                <ng-md-icon icon="menu"></ng-md-icon>
+            </md-button>
+            <h3>E-Invoice</h3>
+            <span flex></span>
+            <md-button aria-label="Search" ng-click="showSearch = !showSearch">
+                <ng-md-icon icon="search"></ng-md-icon>
+            </md-button>
+            <md-button aria-label="Open Settings" ng-click="showListBottomSheet($event)">
+                <ng-md-icon icon="more_vert"></ng-md-icon>
+            </md-button>
+        </div>
+        <md-tabs md-stretch-tabs class="md-primary" md-selected="data.selectedIndex">
+            <md-tab id="tab1" aria-controls="tab1-content">
+                File Load
+            </md-tab>
+            <md-tab id="tab2" aria-controls="tab2-content">
+                Archived
+            </md-tab>
+            <md-tab id="tab3" aria-controls="tab3-content">
+                Classified
+            </md-tab>
+            <md-tab id="tab4" aria-controls="tab4-content">
+                Starred
+            </md-tab>
+            <md-tab id="tab5" aria-controls="tab5-content">
+                Ignored
+            </md-tab>
+        </md-tabs>
+    </md-toolbar>
+    <md-toolbar class="md-hue-1" ng-show="showSearch">
+        <div class="md-toolbar-tools">
+            <md-button ng-click="showSearch = !showSearch" aria-label="Back">
+                <ng-md-icon icon="arrow_back"></ng-md-icon>
+            </md-button>
+            <h3 flex="10">Back</h3>
+            <md-input-container md-theme="input" flex>
+                <label>&nbsp;</label>
+                <input ng-model="search.who" placeholder="enter search">
+            </md-input-container>
+            <md-button aria-label="Search" ng-click="showSearch = !showSearch">
+                <ng-md-icon icon="search"></ng-md-icon>
+            </md-button>
+            <md-button aria-label="Open Settings" ng-click="showListBottomSheet($event)">
+                <ng-md-icon icon="more_vert"></ng-md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-content flex md-scroll-y>
+        <ui-view layout="column" layout-fill layout-padding>
+<content></content>
+<!--
+<div class="tab-content inset" hide-sm layout-sm="row" layout-md="column">
+
+    <ng-switch on="data.selectedIndex" class="tabpanel-container">
+        <div role="tabpanel" id="tab1-content" aria-labelledby="tab1" ng-switch-when="0" md-swipe-left="next()" md-swipe-right="previous()">
+            <inbox></inbox>
+        </div>
+        <div role="tabpanel" id="tab2-content" aria-labelledby="tab2" ng-switch-when="1" md-swipe-left="next()" md-swipe-right="previous()" layout="row" layout-align="top left">
+            <archived-files></archived-files>
+        </div>
+        <div role="tabpanel" id="tab3-content" aria-labelledby="tab3" ng-switch-when="2" md-swipe-left="next()" md-swipe-right="previous()" layout="row" layout-align="top left">
+            <classified-files></classified-files>
+        </div>
+        <div role="tabpanel" id="tab4-content" aria-labelledby="tab4" ng-switch-when="3" md-swipe-left="next()" md-swipe-right="previous()" layout="row" layout-align="top left">
+            <starred-files></starred-files>
+        </div>
+        <div role="tabpanel" id="tab5-content" aria-labelledby="tab5" ng-switch-when="4" md-swipe-left="next()" md-swipe-right="previous()" layout="row" layout-align="top left">
+            <ignored-files></ignored-files>
+        </div>
+    </ng-switch>
+
+</div>
+-->
+        </ui-view>
+    </md-content>
+</div>

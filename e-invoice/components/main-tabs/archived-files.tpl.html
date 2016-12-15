@@ -1,0 +1,34 @@
+<md-list flex-sm="100" flex-md="30">
+    <md-list-item ng-repeat="file in list" data="{{file.id}}" ng-click="getDetail(file.id)" ng-class="{'md-active': file.id === detail.id}">
+        <!--        <md-button class="md-fab md-icon-button" aria-label="Favorite">-->
+        <span class="file-type">
+            <img ng-src="{{file.iconLink}}" aria-label="{{file.name}}"/>
+        </span>
+        <!--        </md-button>-->
+        <p>{{ file.name }}</p>
+        <md-icon ng-model="file.id" class="md-secondary md-warn" aria-label="Hide" aria-hidden="false" ng-click="deleteFile(file,$event)">delete</md-icon>
+        <md-icon class="md-secondary" aria-label="Archive" aria-hidden="false" ng-click="archiveFile(file,$event)">visibility_off</md-icon>
+    </md-list-item>
+</md-list>
+<md-card flex-sm="100" flex-md="60">
+    <md-card-title>
+        <md-card-title-text>
+            <span class="md-headline">
+                <md-button class="md-fab md-icon-button" aria-label="Filetype">
+                    <ng-md-icon icon="folder" aria-label="folder" ng-hide="detail"></ng-md-icon>
+                    <img ng-show="detail" ng-src="{{detail.iconLink}}" aria-label="{{file.title}}"/>
+            </md-button>
+            {{detail.name}}
+            </span>
+        </md-card-title-text>
+    </md-card-title>
+    <md-card-content>
+        <div class="md-media-lg card-media" ng-show="detail"><img ng-show="detail" ng-src="{{detail.thumbnailLink}}" /></div>
+    </md-card-content>
+    <md-card-actions layout="row" layout-align="end center">
+        <md-button class="md-raised md-warn" ng-click="removeTags()" ng-disabled="!detail">Remove</md-button>
+        <md-button class="md-raised md-primary" ng-click="saveDetail()" ng-disabled="!detail">Save</md-button>
+        <md-button ng-click="closeDetail()">Close</md-button>
+        <md-button ng-click="getText()">Text</md-button>
+    </md-card-actions>
+</md-card>

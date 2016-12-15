@@ -11,6 +11,6 @@ describe('google-login-component', function () {
     }));
     describe('$scope.grade', function () {
         //        //        it('sets the strength to "strong" if the password length is >8 chars', function () {
-        expect(true).toEqual(true);
+        //expect(true).toEqual(true);
     });
 });

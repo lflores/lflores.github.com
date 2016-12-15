@@ -1,0 +1,79 @@
+<md-content layout="row">
+    <md-subheader class="md-primary">Inbox files</md-subheader>
+</md-content>
+<md-content layout="row">
+    <md-list flex-sm="100" flex-md="30">
+        <md-list-item ng-repeat="file in list" data="{{file.id}}" ng-click="getDetail(file.id)" ng-class="{'md-active': file.id === detail.id}">
+            <span class="file-type">
+                <img ng-src="{{file.iconLink}}" aria-label="{{file.name}}"/>
+            </span>
+            <p>{{ file.name }}</p>
+            <md-icon ng-model="file.id" class="md-secondary" aria-label="Hide" aria-hidden="false" ng-click="deleteFile(file,$event)">delete
+                <md-tooltip>
+                    Move to trash can
+                </md-tooltip>
+            </md-icon>
+            <md-icon class="md-secondary" aria-label="Ignore" aria-hidden="false" ng-click="ignoreFile(file,$event)">visibility_off
+                <md-tooltip>
+                    Make it invisible for this tool
+                </md-tooltip>
+            </md-icon>
+            <md-icon class="md-secondary" aria-label="Done" aria-hidden="false" ng-click="archiveFile(file,$event)">archive
+                <md-tooltip>
+                    Keep it for this tool
+                </md-tooltip>
+            </md-icon>
+            <md-icon class="md-secondary" aria-label="Starred" aria-hidden="false" ng-click="toggleStarred(file,$event)">{{file.starred?'favorite':'favorite_border'}}
+                <md-tooltip>
+                    Mark<span ng-show="file.starred">ed</span> as favorite document
+                </md-tooltip>
+            </md-icon>
+        </md-list-item>
+    </md-list>
+    <md-card flex-sm="100" flex-md="60">
+        <md-card-title>
+            <md-card-title-text layout="row">
+
+                <span class="file-type">
+                        <ng-md-icon class="md-icon" icon="folder" aria-label="folder" ng-hide="detail"></ng-md-icon>
+                        <img ng-show="detail" ng-src="{{detail.iconLink}}" aria-label="{{file.title}}" />
+                    </span>
+                <span>{{detail.name}}</span>
+
+            </md-card-title-text>
+        </md-card-title>
+        <md-card-content ng-hide="detail">
+            <div layout="column" layout-align="center center">
+                <ng-md-icon icon="info" aria-label="folder" ng-hide="detail" class="md-warn md-hue-5"></ng-md-icon>
+                <p>Select a file in file list to see details</p>
+            </div>
+        </md-card-content>
+        <md-card-content ng-hide="!detail">
+            <md-content>
+                <div layout-gt-sm="row">
+                    <md-input-container layout-gt-sm="column">
+                        <label>Origin</label>
+                        <input ng-model="detail.origin">
+                    </md-input-container>
+                    <md-input-container layout-gt-sm="column">
+                        <label>Type</label>
+                        <md-switch ng-model="detail.type" aria-label="Tipo documento" ng-true-value="'invoice'" ng-false-value="'receipt'">{{ detail.type }}</md-switch>
+                    </md-input-container>
+                </div>
+                <div layout-gt-sm="row">
+                    <md-input-container>
+                        <label>Vencimiento</label>
+                        <md-datepicker ng-model="detail.expirationDate"></md-datepicker>
+                    </md-input-container>
+                </div>
+            </md-content>
+            <div class="md-media-lg card-media"><img ng-show="detail" ng-src="{{detail.thumbnailLink}}" /></div>
+        </md-card-content>
+        <md-card-actions layout="row" layout-align="end center">
+            <md-button class="md-raised md-warn" ng-click="removeTags()" ng-disabled="!detail">Remove</md-button>
+            <md-button class="md-raised md-primary" ng-click="saveDetail()" ng-disabled="!detail">Save</md-button>
+            <md-button ng-click="closeDetail()">Close</md-button>
+            <md-button ng-click="getText()">Text</md-button>
+        </md-card-actions>
+    </md-card>
+</md-content>

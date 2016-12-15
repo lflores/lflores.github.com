@@ -1,0 +1,15 @@
+<md-content layout="row">
+    <md-subheader class="md-primary">Inbox files</md-subheader>
+</md-content>
+<md-list layout="column">
+    <md-list-item ng-repeat="file in list" data="{{file.id}}" ng-click="getDetail(file.id)" ng-class="{'md-active': file.id === detail.id}">
+        <!--        <md-button class="md-fab md-icon-button" aria-label="Favorite">-->
+        <span class="file-type">
+            <img ng-src="{{file.iconLink}}" aria-label="{{file.name}}"/>
+        </span>
+        <!--        </md-button>-->
+        <p>{{ file.name }}</p>
+        <md-icon ng-model="file.id" class="md-secondary" aria-label="Hide" aria-hidden="false" ng-click="restoreFile(file,$event)">restore</md-icon>
+        <md-icon ng-model="file.id" class="md-secondary" aria-label="Hide" aria-hidden="false" ng-click="deleteFile(file,$event)">delete_forever</md-icon>
+    </md-list-item>
+</md-list>

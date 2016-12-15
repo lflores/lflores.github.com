@@ -1,0 +1,27 @@
+<md-dialog aria-label="Mango (Fruit)">
+    <form ng-cloak>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Would you like to delete the file?</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon aria-label="Close dialog">clear</md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <p>If you say yes, the file will be deleted, and will be send to trash folder. You can see it, if you go to Trashed menu item</p>
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions layout="row">
+            <span flex></span>
+            <md-button ng-click="cancel()">
+                No
+            </md-button>
+            <md-button class="md-warn" ng-click="yes('file deleted')">
+                Yes
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

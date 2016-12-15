@@ -1,0 +1,14 @@
+<md-list flex-sm="100" flex-md="30">
+    <md-list-item ng-repeat="file in list" data="{{file.id}}" ng-click="getDetail(file.id)" ng-class="{'md-active': file.id === detail.id}">
+        <!--        <md-button class="md-fab md-icon-button" aria-label="Favorite">-->
+        <span class="file-type">
+            <img ng-src="{{file.iconLink}}" aria-label="{{file.name}}"/>
+        </span>
+        <!--        </md-button>-->
+        <p>{{ file.name }}</p>
+        <md-icon ng-model="file.id" class="md-secondary md-warn" aria-label="Hide" aria-hidden="false" ng-click="deleteFile(file,$event)">delete</md-icon>
+        <md-icon class="md-secondary" aria-label="Ignore" aria-hidden="false" ng-click="ignoreFile(file,$event)">visibility_off</md-icon>
+        <md-icon class="md-secondary" aria-label="Done" aria-hidden="false" ng-click="archiveFile(file,$event)">done</md-icon>
+        <md-icon class="md-secondary" aria-label="Done" aria-hidden="false" ng-click="toggleStarred(file,$event)">{{file.starred?'favorite':'favorite_border'}}</md-icon>
+    </md-list-item>
+</md-list>

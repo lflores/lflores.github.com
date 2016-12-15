@@ -63,14 +63,6 @@ main-tabs {
     color: inherit;
 }
 
-
-/** side menu */
-
-.sidebar-nav > ul.nav > li > a > span.glyphicon {
-    /*    border: 1px red dashed;*/
-    float: right;
-}
-
 .sidebar-nav > ul.nav > li > ul {
     height: 0px;
     -webkit-transition: height 0.8s ease-in-out;
@@ -94,7 +86,7 @@ main-tabs {
 /** Nav Tabs */
 
 .tab-content {
-    padding: 10px;
+    padding: 0px;
     /*border: 1px red dashed;*/
 }
 
@@ -130,63 +122,175 @@ google-login {
     opacity: 0;
 }
 
-#user-info {
+.user-info > .picture {
     transition: all linear .5s;
+    position: absolute;
+}
+
+.user-info > .picture >md-icon {
+    font-size: 48px;
+}
+
+.user-info > .picture.signedIn {
     opacity: 0;
-    float: right;
 }
 
-#user-info.signedIn {
-    opacity: 1;
-}
-
-#user-info > img {
-    height: 30px;
-    width: 30px;
+.user-info > .picture > img {
+    height: 54px!important;
+    width: 54px!important;
     border-radius: 50%;
 }
 
-file-load md-list {
-    width: 100%;
+content md-list {
+    /*    width: 100%;*/
     height: 500px;
     overflow-y: scroll;
     float: left;
     transition: width 500ms ease-in-out;
+    font-size: small;
 }
 
-file-load md-card {
-    width: 0%;
+.md-list-item-inner > p {
+    text-overflow: ellipsis;
+    min-width: 100px;
+    max-width: 300px;
+    white-space: nowrap;
+    overflow: hidden;
+    font-size: small;
+}
+
+content md-card {
+    /*    width: 0%;*/
     height: 500px;
     transition: all 500ms ease-in-out;
-    overflow: hidden;
-    opacity: 0;
-    /*display: inline-block;*/
+    /*    overflow-y: scroll;*/
+    /*    display: inline-block;*/
+    margin: 0px;
 }
 
-file-load md-list.detail {
-    width: 40%;
+content md-card > md-card-title-text {
+    font-size: small;
 }
 
-file-load md-card.detail {
-    width: 60%;
+content md-card > md-card-content {
+    /*border: 1px red dashed;*/
+    transition: all linear 0.5s;
+    height: 300px;
+    overflow-y: auto;
+    overflow-x: hidden;
     opacity: 1;
 }
 
-file-load md-card md-card-title {
+content md-card > md-card-content.ng-hide {
+    height: 0px;
+    opacity: 0;
+}
+
+content md-card > md-card-content ng-md-icon {
     /*    border: 1px red dashed;*/
+    fill: rgba(119, 119, 119, 0.4);
+    /*    stroke: rgba(119, 119, 119, 0.7);*/
 }
 
-file-load md-card md-card-content {
-    box-shadow: 0px 3px rgb(189, 189, 189);
-    overflow-y: scroll;
-    margin-top: 43px;
+content md-card > md-card-content ng-md-icon > svg {
+    width: 60px;
+    height: 60px;
 }
 
-file-load md-card md-card-content .md-media-lg {
-    border: 1px rgb(189, 189, 189) inset;
+md-list-item.active > div.md-button:first-child {
+    padding: 0px 26px;
+    background-color: rgba(158, 158, 158, 0.2);
+    /*border: 1px red dashed;*/
 }
 
-file-load md-card md-card-content .md-media-lg img {
-    display: block;
-    margin: auto;
+
+/*define el contenedor del icono que mostrará el tipo de archivo*/
+
+.file-type {
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+    background-color: #fff;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    padding: 0px 0px;
+    margin-right: 3px;
+}
+
+md-list-item .file-type {}
+
+md-card-title-text .file-type {
+    /*    fill: rgba(119, 119, 119, 0.4);*/
+    /*    padding: 10px 10px;*/
+}
+
+md-card-title-text .file-type ng-md-icon svg {
+    fill: rgba(119, 119, 119, 0.4);
+    margin: 5px;
+}
+
+md-card-title-text .file-type img {
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+md-toolbar:not(.md-hue-1),
+.md-fab {
+    fill: #fff;
+}
+
+.user-avatar {
+    border-radius: 100%;
+}
+
+
+/**
+Bug de material que aun no tiene un selectedItem color para destacar el item seleccionado.
+https://github.com/angular/material/issues/3420
+https://material.angularjs.org/1.1.0/api/directive/mdColors
+*/
+
+.md-toolbar-tools .md-button {
+    min-width: 36px !important;
+}
+
+md-list-item.md-active {
+    background-color: rgb(189, 189, 189);
+}
+
+md-list-item .file-type img {
+    padding: 10px 10px;
+}
+
+.spinning {
+    -webkit-animation: spin 2s infinite linear;
+    -moz-animation: spin 2s infinite linear;
+    -o-animation: spin 2s infinite linear;
+    animation: spin 2s infinite linear;
+}
+
+@-moz-keyframes spin {
+    0% {
+        -moz-transform: rotate(0deg);
+    }
+    100% {
+        -moz-transform: rotate(359deg);
+    }
+}
+
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(359deg);
+    }
+}
+
+@-o-keyframes spin {
+    0% {
+        -o-transform: rotate(0deg);
+    }
+    100% {
+        -o-transform: rotate(359deg);
+    }
 }
