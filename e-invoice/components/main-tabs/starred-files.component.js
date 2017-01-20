@@ -16,9 +16,9 @@ angular
                 var _query = "mimeType != 'application/vnd.google-apps.folder'";
                 _query += " and trashed = false";
                 _query += " and starred = true";
-                _query += " and not appProperties has {key='status' and value=''}"
-                _query += " and not appProperties has {key='status' and value='ignored'}"
-                _query += " and not appProperties has {key='status' and value='archived'}"
+                _query += " and (appProperties has {key='status' and value=''}"
+                _query += " or appProperties has {key='status' and value='ignored'}"
+                _query += " or appProperties has {key='status' and value='archived'})"
 
                 var params = {
                     'pageSize': 30,

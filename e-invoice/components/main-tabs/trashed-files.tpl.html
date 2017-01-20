@@ -1,15 +1,14 @@
 <md-content layout="row">
-    <md-subheader class="md-primary">Inbox files</md-subheader>
+    <md-subheader class="md-primary">Trashed
+        <md-badge class="md-raised md-button md-primary">{{counter.loaded}}</md-badge>
+        <span ng-hide="!counter.hasMore">...</span>
+        <md-tooltip>
+            <span ng-hide="!counter.hasMore">Scroll to discover more items</span>
+            <span ng-hide="counter.hasMore">These are all items</span>
+        </md-tooltip>
+    </md-subheader>
 </md-content>
-<md-list layout="column">
-    <md-list-item ng-repeat="file in list" data="{{file.id}}" ng-click="getDetail(file.id)" ng-class="{'md-active': file.id === detail.id}">
-        <!--        <md-button class="md-fab md-icon-button" aria-label="Favorite">-->
-        <span class="file-type">
-            <img ng-src="{{file.iconLink}}" aria-label="{{file.name}}"/>
-        </span>
-        <!--        </md-button>-->
-        <p>{{ file.name }}</p>
-        <md-icon ng-model="file.id" class="md-secondary" aria-label="Hide" aria-hidden="false" ng-click="restoreFile(file,$event)">restore</md-icon>
-        <md-icon ng-model="file.id" class="md-secondary" aria-label="Hide" aria-hidden="false" ng-click="deleteFile(file,$event)">delete_forever</md-icon>
-    </md-list-item>
-</md-list>
+<md-content layout="row">
+    <file-list data="data" counter="counter" type="trashed" flex-sm="100" flex-md="50"></file-list>
+    <file-detail file="data" flex-sm="100" flex-md="50"></file-detail>
+</md-content>

@@ -4,8 +4,14 @@ angular
     .module('e-invoice')
     .component('classifiedFiles', {
         templateUrl: 'components/main-tabs/classified-files.tpl.html',
-        controller: function ($scope, $element, $attrs) {
+        controller: ClassifiedFilesController
+    });
 
-            $scope.showDetail = true;
-        }
-    })
+function ClassifiedFilesController($scope, $element, $attrs) {
+    $scope.counter = {
+        loaded: 0,
+        hasMore: true
+    };
+
+    //$scope.showDetail = true;
+}

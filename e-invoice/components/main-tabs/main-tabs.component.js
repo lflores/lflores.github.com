@@ -3,7 +3,10 @@ invoiceApp.config(['$locationProvider', '$routeProvider', function ($locationPro
     $locationProvider.hashPrefix('!');
     $routeProvider.
     when('/inbox', {
-        template: '<inbox></inbox>'
+        template: '<inbox layout="column"></inbox>'
+    }).
+    when('/inbox/detail/:fileId', {
+        template: '<file-detail layout="column"></file-detail>'
     }).
     when('/starred', {
         template: '<starred-files></starred-files>'
@@ -19,6 +22,9 @@ invoiceApp.config(['$locationProvider', '$routeProvider', function ($locationPro
     }).
     when('/trashed', {
         template: '<trashed-files></trashed-files>'
+    }).
+    when('/settings', {
+        template: '<settings></settings>'
     }).
     when('/files/:fileId', {
         template: '<file-detail></file-detail>'

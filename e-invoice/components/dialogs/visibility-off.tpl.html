@@ -1,0 +1,28 @@
+<md-dialog aria-label="Ignore this file">
+    <form ng-cloak>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Would you like to ignore the file?</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon aria-label="Close dialog">clear</md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <p>If you say yes, the file will be turned invisible for this application, and will not reviewed on next list, except for "Ignored" tab</p>
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions layout="row">
+            <span flex></span>
+            <md-button class="md-raised" ng-click="cancel()">
+                No
+            </md-button>
+            <md-button class="md-raised md-primary" ng-click="yes('Hola Manola!!!')">
+                Yes
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

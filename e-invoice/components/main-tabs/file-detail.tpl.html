@@ -1,0 +1,82 @@
+<md-progress-circular md-mode="indeterminate" ng-show="loading()" class="animate-if"></md-progress-circular>
+<md-card>
+    <md-card-title>
+        <md-card-title-text layout="row">
+            <span class="file-type">
+                        <md-icon icon="folder" aria-label="folder" ng-hide="detail">folder</md-icon>
+                        <img ng-show="detail" ng-src="{{detail.iconLink}}" aria-label="{{detail.title}}" />
+                    </span>
+            <span>{{detail.name}}</span>
+
+        </md-card-title-text>
+    </md-card-title>
+    <md-card-content ng-hide="detail">
+        <div layout="column" layout-align="center center">
+            <md-icon aria-label="folder" ng-hide="detail" class="md-hue-5">info</md-icon>
+            <p>Select a file in file list to see details</p>
+        </div>
+    </md-card-content>
+    <md-card-content ng-hide="!detail">
+        <md-tabs md-border-bottom md-dynamic-height>
+            <md-tab label="Detail">
+                <div class="md-media-lg card-media" ng-click="zoom($event)"><img class="thumbnail" ng-show="detail" src="" /></div>
+            </md-tab>
+            <md-tab label="Info">
+                <md-content class="md-padding">
+                    <form id="metadataForm" name="metadataForm" ng-submit="metadataForm.$valid && submit()" novalidate>
+                        <md-input-container layout-gt-sm="row" class="md-block">
+                            <label>Origin</label>
+                            <md-autocomplete md-autocomplete-name="origin" md-selected-item="$ctrl.selectedOrigin" md-search-text="$ctrl.searchOrigin" md-selected-item-change="$ctrl.selectedItemChange(origin)" md-items="origin in $ctrl.querySearch($ctrl.searchOrigin)" md-item-text="origin" md-min-length="3" placeholder="Origin?" md-no-cache required>
+                                <md-item-template>
+                                    <span md-highlight-text="$ctrl.searchOrigin" md-highlight-flags="^i">{{origin}}</span>
+                                </md-item-template>
+                                <md-not-found>
+                                    <a ng-click="$ctrl.newOrigin($ctrl.searchOrigin)">"{{$ctrl.searchOrigin}}" create new</a>
+                                </md-not-found>
+                                <div ng-messages="metadataForm.origin.$error">
+                                    <div ng-message="required">Origin (Brand or Service name) is required.</div>
+                                </div>
+                            </md-autocomplete>
+                        </md-input-container>
+                        <md-input-container layout-gt-sm="row">
+                            <md-radio-group id="type" name="type" ng-model="$ctrl.type" layout="row" ng-required="true">
+                                <md-radio-button value="invoice" class="md-primary">Invoice</md-radio-button>
+                                <md-radio-button value="receipt" class="md-primary">Receipt</md-radio-button>
+                            </md-radio-group>
+                            <div ng-messages="metadataForm.type.$error" ng-show="metadataForm.type.$touched">
+                                <div ng-message="required">Documentation Type is required.</div>
+                            </div>
+                        </md-input-container>
+                        <md-input-container layout="row">
+                            <label>Vencimiento</label>
+                            <md-datepicker id="expirationDate" name="expirationDate" ng-model="$ctrl.expirationDate" ng-required="true"></md-datepicker>
+                            <div ng-messages="metadataForm.expirationDate.$error" ng-show="metadataForm.expirationDate.$touched">
+                                <div ng-message="required">Expiration Date is required.</div>
+                            </div>
+                        </md-input-container>
+                        <md-input-container layout="row">
+                            <label>Amount</label>
+                            <input id="amount" name="amount" type="number" ng-model="$ctrl.amount" aria-label="amount" fractionSize="2" ng-required="true">
+                            <div ng-messages="metadataForm.amount.$error" ng-show="metadataForm.amount.$touched">
+                                <div ng-message="required">Amount is required.</div>
+                            </div>
+                        </md-input-container>
+                </md-content>
+            </md-tab>
+            </form>
+        </md-tabs>
+    </md-card-content>
+    <md-card-actions layout="row" layout-align="end center">
+        <!--        <md-button class="md-raised md-warn" ng-click="removeTags()" ng-disabled="!detail">Remove</md-button>-->
+        <md-button class="md-raised md-primary" ng-click="actions.archive.action()" ng-show="actions.archive.visibility()" ng-disabled="!metadataForm.$valid">Archive
+            <md-tooltip>Save file info and archive the file</md-tooltip>
+        </md-button>
+        <md-button class="md-raised md-primary md-hue-1" ng-click="actions.save.action()" ng-show="actions.save.visibility()" ng-disabled="!metadataForm.$valid">Save
+            <md-tooltip>Save file info</md-tooltip>
+        </md-button>
+        <!--        <md-button ng-click="closeDetail()">Close</md-button>-->
+        <md-button class="md-raised" ng-click="actions.lucky.action()" ng-disabled="!detail">I'm feeling Lucky
+            <md-tooltip>Try to autofill file info</md-tooltip>
+        </md-button>
+    </md-card-actions>
+</md-card>

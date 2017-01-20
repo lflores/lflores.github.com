@@ -1,0 +1,59 @@
+<md-dialog aria-label="Ignore this file">
+    <form name="multiple-matches" ng-cloak>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Next fields has multiple matches, please tell what's correct?</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon aria-label="Close dialog">clear</md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <p>Next fields has multiple matches, please select the correct</p>
+            </div>
+            <md-content layout="row" class="field-data">
+                <md-input-container>
+                    <label>Expiration Date</label>
+                    <md-datepicker ng-model="result.expirationDate.date" disabled>
+                        <div class="validation-messages" ng-messages="multiple-matches.dateField.$error">
+                            <div ng-message="required">This date is required!</div>
+                        </div>
+                    </md-datepicker>
+                </md-input-container>
+                <md-list flex>
+                    <md-list-item ng-repeat="date in dates" ng-click="selectDate(date)" ng-class="{'md-active': date === result.expirationDate.date}">
+                        <div class="md-list-item-text" layout="column">
+                            <div>{{ formatedDate(date.date) }}</div>
+                            <div class="md-secondary">{{ date.text }}</div>
+                        </div>
+                    </md-list-item>
+                </md-list>
+            </md-content>
+            <md-content layout="row" class="field-data">
+                <md-input-container>
+                    <label>Amount</label>
+                    <input type="text" ng-model="result.amount.amount">
+                </md-input-container>
+                <md-list flex>
+                    <md-list-item ng-repeat="amount in amounts" ng-click="selectAmount(amount)">
+                        <div class="md-list-item-text" layout="column">
+                            <div>{{ formatedAmount(amount.amount) }}</div>
+                            <div class="md-secondary">{{ amount.text }}</div>
+                        </div>
+                    </md-list-item>
+                </md-list>
+            </md-content>
+        </md-dialog-content>
+        <md-dialog-actions layout="row">
+            <span flex></span>
+            <md-button class="md-raised" ng-click="cancel()">
+                No
+            </md-button>
+            <md-button class="md-raised md-primary" ng-click="yes('Hola Manola!!!')">
+                Yes
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

@@ -1,0 +1,52 @@
+<div layout-gt-sm="row">
+    <form name="settings">
+        <md-subheader>User configuration</md-subheader>
+        <div layout-gt-sm="row" ng-show="appConfig">
+            <md-input-container class="md-block" flex-gt-sm>
+                <label>Date format preferences</label>
+                <input name="dateFormat" ng-model="appConfig.dateFormat" ng-pattern="/^[MmDd]{2}[-/][MmDd]{2}[-/][Yy]{4}$/" required ng-disabled="disabled.dateFormat" />
+
+                <div class="hint" ng-if="showHints">Use D for days, M for months and Y for years.</div>
+
+                <div ng-messages="settings.dateFormat.$error" ng-if="!showHints">
+                    <div ng-message="required">The date format is required</div>
+                    <div ng-message="pattern">The allowed chars for date are D, M, Y. Also - and / can be used as separators</div>
+                </div>
+            </md-input-container>
+            <md-input-container class="md-block" flex-gt-sm>
+                <label>Folder Preferences</label>
+                <input name="folder" ng-model="appConfig.folder" ng-pattern="/^\w+$/" required ng-disabled="disabled.folder" />
+
+                <div class="hint" ng-if="showHints">Use D for days, M for months and Y for years.</div>
+
+                <div ng-messages="settings.folder.$error" ng-if="!showHints">
+                    <div ng-message="required">The date format is required</div>
+                    <div ng-message="pattern">The allowed chars for date are D, M, Y. Also - and / can be used as separators</div>
+                </div>
+            </md-input-container>
+            <md-input-container class="md-block" flex-gt-sm>
+                <label>Language</label>
+                <input name="language" ng-model="appConfig.language" ng-pattern="/^[a-zA-Z]{2}$/" required ng-disabled="disabled.language" />
+
+                <div class="hint" ng-if="showHints">Two letters code.</div>
+
+                <div ng-messages="settings.language.$error" ng-if="!showHints">
+                    <div ng-message="required">The language is required</div>
+                    <div ng-message="pattern">EN</div>
+                </div>
+            </md-input-container>
+
+        </div>
+        <div layout-gt-sm="row" ng-show="appConfig">
+            <md-input-container class="md-block" flex-gt-sm>
+                <label>Names (Brand or Services Names)</label>
+                <md-chips ng-model="appConfig.names" name="name" readonly="disabled.names" md-removable="false">
+                    <md-chip-template>
+                        <strong>{{$chip}}</strong>
+                        <!--                        <em>(fruit)</em>-->
+                    </md-chip-template>
+                </md-chips>
+            </md-input-container>
+        </div>
+    </form>
+</div>

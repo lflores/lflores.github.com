@@ -10,3 +10,11 @@ String.prototype.cleanSpecialChars = function () {
     ret = ret.replace(/"$/g, "");
     return ret;
 }
+
+String.prototype.paddingLeft = function (paddingValue) {
+    return String(paddingValue + this).slice(-paddingValue.length);
+};
+
+String.prototype.repeat = function (length) {
+    return Array(length + 1).join(this);
+};

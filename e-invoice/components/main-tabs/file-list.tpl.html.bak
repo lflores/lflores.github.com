@@ -1,0 +1,33 @@
+<md-virtual-repeat-container>
+    <md-list-item md-virtual-repeat="file in infiniteItems" md-on-demand class="repeated-item" flex ng-click="select(file)" ng-class="{'md-active': file.id === $ctrl.data.id,'header': file.header}" ng-hide="!file" ng-animate>
+        <span class="file-type" ng-hide="file.header">
+                    <img ng-src="{{file.iconLink}}" aria-label="{{file.name}}"/>
+                </span>
+        <div class="md-list-item-text" flex="50">
+            {{ file.name }}
+            <md-tooltip>{{ file.name }}</md-tooltip>
+        </div>
+        <md-icon ng-model="file.id" class="md-secondary" aria-label="Hide" aria-hidden="false" ng-click="actions.delete.action(file,$event)" ng-hide="file.header">{{actions.delete.icon(file)}}
+            <md-tooltip>
+                {{actions.delete.tooltip(file)}}
+            </md-tooltip>
+        </md-icon>
+        <md-icon class="md-secondary" aria-label="Ignore" aria-hidden="false" ng-click="actions.visibility.action(file,$event)" ng-hide="file.header">
+            {{actions.visibility.icon(file)}}
+            <md-tooltip>
+                {{actions.visibility.tooltip(file)}}
+            </md-tooltip>
+        </md-icon>
+        <md-icon class="md-secondary" aria-label="Done" aria-hidden="false" ng-click="actions.infolder.action(file,$event)" ng-disabled="actions.infolder.disabled(file)" ng-hide="file.header">{{actions.infolder.icon(file)}}
+            <md-tooltip>
+                {{actions.infolder.tooltip(file)}}
+            </md-tooltip>
+        </md-icon>
+        <md-icon class="md-secondary" aria-label="Starred" aria-hidden="false" ng-click="actions.starred.action(file,$event)" ng-hide="file.header">{{actions.starred.icon(file)}}
+            <md-tooltip>
+                {{actions.starred.tooltip(file)}}
+            </md-tooltip>
+        </md-icon>
+    </md-list-item>
+    <md-progress-circular md-mode="indeterminate" ng-hide="!hasMoreItems()"></md-progress-circular>
+</md-virtual-repeat-container>

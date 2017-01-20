@@ -1,42 +1,19 @@
-<!--<div class="inbox-file" ng-class="{'detail':showDetail()}">-->
-<md-list ng-class="{'detail':showDetail}">
-    <md-list-item ng-repeat="file in list" data="{{file.id}}" ng-click="getDetail(file.id)" ng-class="{'md-active': file.id === detail.id}">
-        <!--        <md-button class="md-fab md-icon-button" aria-label="Favorite">-->
-        <span class="file-type">
-            <img ng-src="{{file.iconLink}}" aria-label="{{file.name}}"/>
+<md-content layout="row">
+    <md-subheader class="md-primary">Classified
+        <md-badge class="md-raised md-button md-primary">{{counter.loaded}}</md-badge>
+        <span ng-hide="!counter.hasMore">...</span>
+        <md-tooltip>
+            <span ng-hide="!counter.hasMore">Scroll to discover more items</span>
+            <span ng-hide="counter.hasMore">These are all items</span>
+        </md-tooltip>
         </span>
-        <!--        </md-button>-->
-        <p>{{ file.name }}</p>
-    </md-list-item>
-</md-list>
-<md-card ng-class="{'detail':showDetail}">
-    <md-card-title>
-        <md-card-title-text>
-            <span class="md-headline">
-<!--                <span class="file-type">-->
-                <md-button class="md-fab md-icon-button" aria-label="Filetype">
-                    <img ng-src="{{detail ? detail.iconLink: '/resources/images/filetype/icon_11_collection_list_1.png'}}" aria-label="{{file.title}}" />
-<!--                    </span>-->
-            </md-button>
-            {{detail.name}}
-            </span>
-            <span class="md-subhead">
-                <md-chips ng-model="tags" name="tags" readonly="false" md-removable="true" md-add-on-blur="true" md-separator-keys="keys" placeholder="Enter a tag or write one" delete-button-label="Remove Tag" delete-hint="Press delete to remove tag" ng-disabled="!detail">
-            <md-chip-template>
-                <strong>{{$chip}}</strong>
-            </md-chip-template>
-        </md-chips>
-            </span>
-        </md-card-title-text>
-    </md-card-title>
-    <md-card-content>
-        <div class="md-media-lg card-media"><img src="{{detail.thumbnailLink}}" /></div>
-    </md-card-content>
-    <md-card-actions layout="row" layout-align="end center">
-        <md-button class="md-raised md-warn" ng-click="removeTags()" ng-disabled="!detail">Remove</md-button>
-        <md-button class="md-raised md-primary" ng-click="saveDetail()" ng-disabled="!detail">Save</md-button>
-        <md-button ng-click="closeDetail()">Close</md-button>
-        <md-button ng-click="getText()">Text</md-button>
-    </md-card-actions>
-</md-card>
-<!--</div>-->
+        <md-icon class="md-primary md-raised" ng-show="counter.filtered">filter_list
+            <md-tooltip>Content filtered</md-tooltip>
+        </md-icon>
+    </md-subheader>
+    <group-by grouping="groupBy"></group-by>
+</md-content>
+<md-content layout="row">
+    <file-list data="data" counter="counter" type="classified" grouping="groupBy" flex-sm="100" flex-md="50"></file-list>
+    <file-detail file="data" flex-sm="100" flex-md="50"></file-detail>
+</md-content>

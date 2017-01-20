@@ -1,5 +1,5 @@
-/* app css stylesheet */
-
+    /* app css stylesheet */
+    /*
 .menu {
     list-style: none;
     border-bottom: 0.1em solid black;
@@ -22,275 +22,462 @@
 .menu > li + li:before {
     content: "|";
     padding-right: 0.3em;
-}
-
+}*/
+    /*
 form.tab-form-demo .tab-pane {
     margin: 20px 20px;
-    /*border: 1px red dashed;*/
+    border: 1px red dashed;
 }
-
+*/
+    
+    md-badge {
+        margin: 0 0 0 8px!important;
+        padding: 4px 4px!important;
+        border-radius: 50%!important;
+        min-width: 36px!important;
+        min-height: 30px!important;
+        line-height: 30px!important;
+    }
+    /*
 .content {
-    /*border: 1px blue dashed;*/
+    border: 1px blue dashed;
     height: 320px;
-}
-
-side-menu {
-    /*border: 1px green dashed;*/
-    width: 220px;
-    display: inline-block;
-    background-color: rgba(0, 128, 0, 0.17);
-    height: 100%;
-    float: left;
-}
-
-footer {
-    position: absolute;
-    bottom: 0px;
-}
-
-main-tabs {
-    /*border: 1px red dashed;*/
-    display: inline-block;
-    height: 100%;
-    width: 80%;
-}
-
-.navbar-brand {
-    color: green!important;
-}
-
-.navbar-brand .glyphicon {
-    color: inherit;
-}
-
-.sidebar-nav > ul.nav > li > ul {
-    height: 0px;
-    -webkit-transition: height 0.8s ease-in-out;
-    -moz-transition: height 0.8s ease-in-out;
-    -ms-transition: height 0.8s ease-in-out;
-    transition: height 0.8s ease-in-out;
-    overflow-y: hidden;
-    /*    border: 1px red dashed;*/
-}
-
-.sidebar-nav > ul.nav > li.active > ul {
-    height: 270px;
-    -webkit-transition: height 0.8s ease-in-out;
-    -moz-transition: height 0.8s ease-in-out;
-    -ms-transition: height 0.8s ease-in-out;
-    transition: height 0.8s ease-in-out;
-    /*    border: 1px red dashed;*/
-}
-
-
-/** Nav Tabs */
-
-.tab-content {
-    padding: 0px;
-    /*border: 1px red dashed;*/
-}
-
-google-login {
-    /*    width: 120px;*/
-    /*    height: 50px;*/
-    /*    border: 1px red dashed;*/
-    padding: 0px;
-}
-
-google-login {
-    width: 100px;
-    height: 35px;
-    /*border: 1px red dashed;*/
-}
-
-.md-button.google-sign-in {
-    position: absolute;
-    opacity: 1;
-    transition: all .5s ease-in-out;
-    background-image: url(resources/images/google-sign-in.png);
-    background-position: center;
-    background-size: cover;
-    border-radius: 3px;
-    min-width: 100px;
-    min-height: 25px;
-    float: right;
-}
-
-.md-button.google-sign-in.ng-hide {
-    width: 0px;
-    height: 0px;
-    opacity: 0;
-}
-
-.user-info > .picture {
-    transition: all linear .5s;
-    position: absolute;
-}
-
-.user-info > .picture >md-icon {
-    font-size: 48px;
-}
-
-.user-info > .picture.signedIn {
-    opacity: 0;
-}
-
-.user-info > .picture > img {
-    height: 54px!important;
-    width: 54px!important;
-    border-radius: 50%;
-}
-
-content md-list {
-    /*    width: 100%;*/
-    height: 500px;
-    overflow-y: scroll;
-    float: left;
-    transition: width 500ms ease-in-out;
-    font-size: small;
-}
-
-.md-list-item-inner > p {
-    text-overflow: ellipsis;
-    min-width: 100px;
-    max-width: 300px;
-    white-space: nowrap;
-    overflow: hidden;
-    font-size: small;
-}
-
-content md-card {
-    /*    width: 0%;*/
-    height: 500px;
-    transition: all 500ms ease-in-out;
-    /*    overflow-y: scroll;*/
-    /*    display: inline-block;*/
-    margin: 0px;
-}
-
-content md-card > md-card-title-text {
-    font-size: small;
-}
-
-content md-card > md-card-content {
-    /*border: 1px red dashed;*/
-    transition: all linear 0.5s;
-    height: 300px;
-    overflow-y: auto;
-    overflow-x: hidden;
-    opacity: 1;
-}
-
-content md-card > md-card-content.ng-hide {
-    height: 0px;
-    opacity: 0;
-}
-
-content md-card > md-card-content ng-md-icon {
-    /*    border: 1px red dashed;*/
-    fill: rgba(119, 119, 119, 0.4);
-    /*    stroke: rgba(119, 119, 119, 0.7);*/
-}
-
-content md-card > md-card-content ng-md-icon > svg {
-    width: 60px;
-    height: 60px;
-}
-
-md-list-item.active > div.md-button:first-child {
-    padding: 0px 26px;
-    background-color: rgba(158, 158, 158, 0.2);
-    /*border: 1px red dashed;*/
-}
-
-
-/*define el contenedor del icono que mostrará el tipo de archivo*/
-
-.file-type {
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
-    background-color: #fff;
-    border-radius: 50%;
-    width: 36px;
-    height: 36px;
-    padding: 0px 0px;
-    margin-right: 3px;
-}
-
-md-list-item .file-type {}
-
-md-card-title-text .file-type {
-    /*    fill: rgba(119, 119, 119, 0.4);*/
-    /*    padding: 10px 10px;*/
-}
-
-md-card-title-text .file-type ng-md-icon svg {
-    fill: rgba(119, 119, 119, 0.4);
-    margin: 5px;
-}
-
-md-card-title-text .file-type img {
-    margin-left: 10px;
-    margin-top: 10px;
-}
-
-md-toolbar:not(.md-hue-1),
-.md-fab {
-    fill: #fff;
-}
-
-.user-avatar {
-    border-radius: 100%;
-}
-
-
-/**
+    padding: 10px;
+}*/
+    
+    side-menu {
+        /*border: 1px green dashed;*/
+        width: 220px;
+        display: inline-block;
+        background-color: rgba(0, 128, 0, 0.17);
+        height: 100%;
+        float: left;
+    }
+    
+    footer {
+        position: absolute;
+        bottom: 0px;
+    }
+    
+    main-tabs {
+        /*border: 1px red dashed;*/
+        display: inline-block;
+        height: 100%;
+        width: 80%;
+    }
+    
+    .navbar-brand {
+        color: green!important;
+    }
+    
+    .navbar-brand .glyphicon {
+        color: inherit;
+    }
+    
+    .sidebar-nav > ul.nav > li > ul {
+        height: 0px;
+        -webkit-transition: height 0.8s ease-in-out;
+        -moz-transition: height 0.8s ease-in-out;
+        -ms-transition: height 0.8s ease-in-out;
+        transition: height 0.8s ease-in-out;
+        overflow-y: hidden;
+        /*    border: 1px red dashed;*/
+    }
+    
+    .sidebar-nav > ul.nav > li.active > ul {
+        height: 270px;
+        -webkit-transition: height 0.8s ease-in-out;
+        -moz-transition: height 0.8s ease-in-out;
+        -ms-transition: height 0.8s ease-in-out;
+        transition: height 0.8s ease-in-out;
+        /*    border: 1px red dashed;*/
+    }
+    /** Nav Tabs */
+    
+    .tab-content {
+        padding: 0px;
+        /*border: 1px red dashed;*/
+    }
+    
+    google-login {
+        /*    width: 120px;*/
+        /*    height: 50px;*/
+        /*    border: 1px red dashed;*/
+        padding: 0px;
+    }
+    
+    google-login {
+        width: 100px;
+        height: 35px;
+        /*border: 1px red dashed;*/
+    }
+    
+    .md-button.google-sign-in {
+        position: absolute;
+        opacity: 1;
+        transition: all .5s ease-in-out;
+        background-image: url(resources/images/google-sign-in.png);
+        background-position: center;
+        background-size: cover;
+        border-radius: 3px;
+        min-width: 100px;
+        min-height: 25px;
+        float: right;
+    }
+    
+    .md-button.google-sign-in.ng-hide {
+        width: 0px;
+        height: 0px;
+        opacity: 0;
+    }
+    
+    .user-info > .picture {
+        transition: all linear .5s;
+        position: absolute;
+    }
+    
+    .user-info > .picture >md-icon {
+        font-size: 48px;
+    }
+    
+    .user-info > .picture.signedIn {
+        opacity: 0;
+    }
+    
+    .user-info > .picture > img {
+        height: 54px!important;
+        width: 54px!important;
+        border-radius: 50%;
+    }
+    
+    .flex-md-50 {
+        width: 49%;
+    }
+    
+    file-list.flex-sm-100 {}
+    
+    file-list {
+        margin: 0px 5px 0px 5px;
+        padding: 0px 5px 0px 0px;
+    }
+    
+    file-detail {
+        margin: 0px;
+        padding: 0px;
+    }
+    
+    file-list md-list,
+    file-list .md-virtual-repeat-container {
+        padding: 10px;
+        width: 100%;
+        height: 500px;
+        overflow: hidden;
+        float: left;
+        transition: all 500ms ease-in-out;
+        font-size: small;
+        /*    font-weight: bold;*/
+        margin-left: 5px;
+        /*    border: 1px solid #e0e0e0;*/
+        /*border: 1px red dashed;*/
+    }
+    
+    file-list md-list-item {
+        border-bottom: 1px solid #e0e0e0;
+    }
+    
+    file-list md-list-item.header {
+        /*background-color: rgb(46, 125, 50);*/
+        background-color: rgb(76, 175, 80);
+        color: rgba(255, 255, 255, 0.87);
+    }
+    
+    file-list md-list .md-list-item-inner > div,
+    file-list .md-virtual-repeat-container .md-list-item-inner > div {
+        text-overflow: ellipsis;
+        min-width: 100px;
+        max-width: 250px;
+        white-space: nowrap;
+        overflow: hidden;
+        font-size: small;
+        /*    font-weight: bold;*/
+        display: inline-block;
+    }
+    
+    file-detail md-card {
+        /*    width: 0%;*/
+        height: 500px;
+        transition: all 500ms ease-in-out;
+        /*    overflow-y: scroll;*/
+        /*    display: inline-block;*/
+        margin: 0px 0px 0px 10px;
+        border: 1px solid #e0e0e0;
+    }
+    
+    file-detail md-card > md-card-title {
+        max-height: 20px;
+        padding: 0px;
+    }
+    
+    file-detail md-card > md-card-title > md-card-title-text {
+        font-size: small;
+        font-weight: bold;
+        line-height: 45px;
+        height: 45px;
+        /*    border: 1px red dashed;*/
+    }
+    
+    file-detail md-card > md-card-content {
+        /*border: 1px red dashed;*/
+        transition: all linear 0.5s;
+        min-height: 300px;
+        max-height: 500px;
+        overflow: hidden;
+        opacity: 1;
+    }
+    
+    file-detail md-card > md-card-content.ng-hide {
+        height: 0px;
+        opacity: 0;
+    }
+    
+    file-detail md-card > md-card-content > div > md-icon {
+        /*    border: 1px red dashed;*/
+        fill: rgba(119, 119, 119, 0.4);
+        width: 58px;
+        height: 58px;
+        font-size: 50px!important;
+        /*    stroke: rgba(119, 119, 119, 0.7);*/
+        margin: 5px;
+    }
+    
+    file-detail md-card > md-card-content > md-icon > svg {
+        width: 60px;
+        height: 60px;
+    }
+    
+    file-detail md-card > md-card-content > .card-media {
+        /*    border: 1px red dashed;*/
+        overflow: hidden;
+        cursor: zoom-in;
+    }
+    
+    md-list-item._md-button-wrap > div.md-button:first-child {
+        padding: 0px 5px;
+    }
+    
+    md-list-item > div > .md-secondary-container > .md-button {
+        margin: 0 3px;
+        width: 35px;
+        height: 35px;
+        padding: 7px;
+        /*        border: 1px red dashed;*/
+        box-shadow: rgba(0, 0, 0, 0.2) 1px 2px
+    }
+    
+    md-list-item.active > div.md-button:first-child {
+        padding: 0px 26px;
+        background-color: rgba(158, 158, 158, 0.2);
+        /*border: 1px red dashed;*/
+    }
+    /*define el contenedor del icono que mostrará el tipo de archivo*/
+    
+    .file-type {
+        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+        background-color: #fff;
+        border-radius: 50%;
+        width: 36px;
+        height: 36px;
+        padding: 0px 0px;
+        margin: 5px;
+        margin-right: 3px;
+    }
+    
+    md-list-item .file-type {}
+    
+    md-card-title-text .file-type {
+        /*    fill: rgba(119, 119, 119, 0.4);*/
+        /*    padding: 10px 10px;*/
+    }
+    
+    md-card-title-text .file-type md-icon {
+        fill: rgba(119, 119, 119, 0.4);
+        margin: 5px;
+    }
+    
+    md-card-title-text .file-type img {
+        margin-left: 10px;
+        margin-top: 10px;
+    }
+    
+    md-toolbar:not(.md-hue-1),
+    .md-fab {
+        fill: #fff;
+    }
+    
+    .user-avatar {
+        border-radius: 100%;
+    }
+    /**
 Bug de material que aun no tiene un selectedItem color para destacar el item seleccionado.
 https://github.com/angular/material/issues/3420
 https://material.angularjs.org/1.1.0/api/directive/mdColors
 */
-
-.md-toolbar-tools .md-button {
-    min-width: 36px !important;
-}
-
-md-list-item.md-active {
-    background-color: rgb(189, 189, 189);
-}
-
-md-list-item .file-type img {
-    padding: 10px 10px;
-}
-
-.spinning {
-    -webkit-animation: spin 2s infinite linear;
-    -moz-animation: spin 2s infinite linear;
-    -o-animation: spin 2s infinite linear;
-    animation: spin 2s infinite linear;
-}
-
-@-moz-keyframes spin {
-    0% {
-        -moz-transform: rotate(0deg);
+    
+    .md-toolbar-tools .md-button {
+        min-width: 36px !important;
     }
-    100% {
-        -moz-transform: rotate(359deg);
+    
+    md-list-item.md-active {
+        background-color: rgb(189, 189, 189);
     }
+    
+    md-list-item .file-type img {
+        padding: 10px 10px;
+    }
+    /*Virtual repater*/
+    /*
+#vertical-container {
+    height: 292px;
+    width: 100%;
+    max-width: 400px;
+    border: 1px red dashed;
 }
-
-@-webkit-keyframes spin {
-    0% {
-        -webkit-transform: rotate(0deg);
-    }
-    100% {
-        -webkit-transform: rotate(359deg);
-    }
+*/
+    /*
+.repeated-item {
+    border-bottom: 1px solid #ddd;
+    box-sizing: border-box;
+    height: 40px;
+    padding-top: 10px;
 }
-
-@-o-keyframes spin {
-    0% {
-        -o-transform: rotate(0deg);
+*/
+    
+    .spinning {
+        -webkit-animation: spin 2s infinite linear;
+        -moz-animation: spin 2s infinite linear;
+        -o-animation: spin 2s infinite linear;
+        animation: spin 2s infinite linear;
     }
-    100% {
-        -o-transform: rotate(359deg);
+    
+    @-moz-keyframes spin {
+        0% {
+            -moz-transform: rotate(0deg);
+        }
+        100% {
+            -moz-transform: rotate(359deg);
+        }
     }
-}
+    
+    @-webkit-keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+        100% {
+            -webkit-transform: rotate(359deg);
+        }
+    }
+    
+    @-o-keyframes spin {
+        0% {
+            -o-transform: rotate(0deg);
+        }
+        100% {
+            -o-transform: rotate(359deg);
+        }
+    }
+    /* Estilos para el tema por default*/
+    
+    md-badge.md-primary {
+        font-size: small;
+        font-weight: bold;
+        min-width: 20px;
+        width: 20px;
+        display: inline-block;
+        text-align: center;
+        color: #fff;
+        background-color: rgb(76, 175, 80);
+    }
+    
+    md-badge.md-warn {
+        color: #fff;
+        background-color: rgb(255, 87, 34);
+    }
+    
+    md-progress-circular {
+        padding: 10px;
+        border-radius: 50%;
+        position: absolute;
+        left: 48%;
+        bottom: 0%;
+        background-color: #fff;
+        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+        z-index: 1000;
+        /*    display: none;*/
+    }
+    
+    md-progress-circular > svg {
+        margin: 10px;
+    }
+    
+    md-progress-circular.md-green-theme > svg {}
+    
+    file-list {
+        border: 1px solid #e0e0e0;
+    }
+    
+    file-detail {
+        /*    border: 1px solid #e0e0e0;*/
+    }
+    
+    file-detail > md-progress-circular {
+        display: block!important;
+        position: absolute;
+        top: 50%;
+        left: 67%;
+        /*    z-index: 1000;*/
+    }
+    
+    md-content.field-data > md-list {
+        /*    border: 1px red dashed;*/
+        font-size: small;
+        margin: 0px;
+        padding: 0px;
+        max-height: 100px;
+        overflow-y: auto;
+        overflow-x: hidden;
+        max-width: 300px;
+    }
+    
+    md-content.field-data > md-list .md-secondary-container {
+        border: 1px #989898 solid;
+        max-width: 80%;
+        text-overflow: ellipsis;
+        border-radius: 5px;
+        white-space: nowrap;
+    }
+    
+    md-content.field-data > md-list > md-list-item {}
+    
+    img.thumbnail {
+        /*border: 1px red dashed;*/
+        min-width: 50px;
+        min-height: 50px;
+    }
+    
+    settings md-chips md-chips-wrap {
+        padding-top: 30px!important;
+    }
+    
+    settings md-chips md-chip {
+        line-height: 22px;
+        font-size: small;
+        height: 22px;
+    }
+    
+    group-by md-input-container {
+        margin: 28px 0px
+    }
+    
+    group-by md-radio-button {
+        font-size: small;
+    }

@@ -1,0 +1,19 @@
+{
+    "rules": [
+        {
+            "regex": /^.*(\d{2}[\/-]\d{2}[\/-]\d{2,4}).*$/gm,
+            "property": "dates",
+            "format": "DDMMYYYY"
+        },
+        {
+            "regex": /^.*([\$]*\s[-]*\d+[,]\d+).*$/gm,
+            "property": "prices",
+            "format": ""
+        },
+        {
+            "regex": /^.*([\$]*\s[-]*\d+[,]\d+).*$/gm,
+            "property": "name",
+            "format": ""
+        }
+ ]
+}

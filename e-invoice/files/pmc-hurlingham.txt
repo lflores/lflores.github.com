@@ -1,9 +1,0 @@
-﻿Pago de Municipio de Hurlingham
-Fecha Hora Nro. Trans.
-05/01/16 10:13:00 1920
-Identificación 07001204614
-Por un importe de $ 65,00
-Debitado de su cta. CA $ XXXX328013
-PART. 204614 COMP. 02-14706403 01/2016 COMPROBANTE VALIDO DE PAGO.CONSERVELO
-Nro. de Control:
-7964
