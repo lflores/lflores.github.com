@@ -437,23 +437,35 @@ https://material.angularjs.org/1.1.0/api/directive/mdColors
         /*    z-index: 1000;*/
     }
     
+    md-content.field-data {
+        border: 1px #ddd solid;
+        border-radius: 5px;
+        margin-bottom: 3px;
+        margin: 5px;
+    }
+    
     md-content.field-data > md-list {
         /*    border: 1px red dashed;*/
+        border-left: 1px #ddd solid;
         font-size: small;
         margin: 0px;
         padding: 0px;
-        max-height: 100px;
+        max-height: 150px;
         overflow-y: auto;
         overflow-x: hidden;
-        max-width: 300px;
+        max-width: 400px;
     }
     
     md-content.field-data > md-list .md-secondary-container {
-        border: 1px #989898 solid;
-        max-width: 80%;
+        /*        border: 1px #989898 solid;*/
+        max-width: 400px;
+        overflow: hidden;
         text-overflow: ellipsis;
         border-radius: 5px;
         white-space: nowrap;
+        background-color: #eee;
+        margin-left: 10px;
+        padding: 5px;
     }
     
     md-content.field-data > md-list > md-list-item {}
@@ -480,4 +492,18 @@ https://material.angularjs.org/1.1.0/api/directive/mdColors
     
     group-by md-radio-button {
         font-size: small;
+    }
+    
+    inbox .drop-box {
+        background: #F8F8F8;
+        border: 5px dashed #DDD;
+        width: auto;
+        float: right;
+        text-align: center;
+        padding: 10px 10px;
+        margin-left: 10px;
+    }
+    
+    inbox .dragover {
+        border: 5px dashed #1e801e;
     }

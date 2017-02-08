@@ -1,14 +1,14 @@
 'use strict';
 var invoiceApp = angular.module('e-invoice', ['ngRoute',
                                               'ngAnimate',
-                                              //'ngMdIcons',
                                               'ngMaterial',
                                               'ngMessages',
+                                              'ngFileUpload',
                                               'angular-google-gapi',
                                               'e-invoice.components',
-                                              'e-invoice.services',
+                                              'e-invoice.services'
                                              ])
-    .config(['$locationProvider', '$routeProvider', '$mdThemingProvider', function ($locationProvider, $routeProvider, $mdThemingProvider) {
+    .config(['$locationProvider', '$routeProvider', '$mdThemingProvider', '$mdDateLocaleProvider', function ($locationProvider, $routeProvider, $mdThemingProvider, $mdDateLocaleProvider) {
         $locationProvider.hashPrefix('!');
 
         $routeProvider.otherwise({
@@ -22,6 +22,10 @@ var invoiceApp = angular.module('e-invoice', ['ngRoute',
         //.accentPalette('blue-grey');
 
         $mdThemingProvider.setDefaultTheme('green');
+
+        $mdDateLocaleProvider.formatDate = function (date) {
+            return moment(date).format('DD/MM/YYYY');
+        };
     }]);
 
 angular.module('e-invoice.services', ['ngRoute', 'angular-google-gapi']);

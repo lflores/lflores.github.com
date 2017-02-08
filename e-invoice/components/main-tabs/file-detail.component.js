@@ -4,10 +4,9 @@ angular
     .component('fileDetail', {
         bindings: {
             file: '<',
-            //onUpdate: '&'
         },
         templateUrl: 'components/main-tabs/file-detail.tpl.html',
-        controller: function ($scope, $element, $mdToast, $mdDialog, GApi, textDiscovery, appConfigService) {
+        controller: function ($scope, $rootScope, $element, $mdToast, $mdDialog, GApi, textDiscovery, appConfigService) {
             var ctrl = this;
             var fileId = null;
             var element = $element;
@@ -216,6 +215,7 @@ angular
                 appConfigService.folder(new Date(ctrl.expirationDate).getFullYear(), function (folderId) {
                     var params = {
                         fileId: $scope.detail.id,
+                        fields: "appProperties,iconLink,id,modifiedTime,name,parents,properties,spaces,thumbnailLink,webContentLink",
                         appProperties: {
                             origin: ctrl.selectedOrigin,
                             expirationDate: new Date(ctrl.expirationDate),
@@ -225,7 +225,8 @@ angular
                     };
 
                     GApi.execute('drive', 'files.update', params).then(function (resp) {
-                        $scope.detail = null;
+                        $rootScope.$broadcast("file-updated", resp);
+                        $scope.refresh();
                     }, function () {
                         //ha ocurrido un error
                     });
@@ -247,6 +248,7 @@ angular
                 appConfigService.folder(new Date(ctrl.expirationDate).getFullYear(), function (folderId) {
                     var params = {
                         fileId: $scope.detail.id,
+                        fields: "appProperties,iconLink,id,modifiedTime,name,parents,properties,spaces,thumbnailLink,webContentLink",
                         appProperties: {
                             origin: ctrl.selectedOrigin,
                             expirationDate: new Date(ctrl.expirationDate),
@@ -260,8 +262,8 @@ angular
                     };
 
                     GApi.execute('drive', 'files.update', params).then(function (resp) {
+                        $rootScope.$broadcast("file-removed", resp.id);
                         $scope.detail = null;
-
                     }, function () {
                         //ha ocurrido un error
                     });
@@ -295,9 +297,7 @@ angular
 angular
     .module('e-invoice.components', [])
     .controller("MultipleMatchesController", ['$scope', '$mdDialog', function ($scope, $mdDialog) {
-        console.log("Pude cargar el MultipleMatchesController");
-
-
+        //console.log("Pude cargar el MultipleMatchesController");
     }]);
 
 function MultipleMatchesController($scope, $mdDialog, dates, amounts) {
@@ -309,7 +309,7 @@ function MultipleMatchesController($scope, $mdDialog, dates, amounts) {
     }
 
     $scope.formatedAmount = function (amount) {
-        return numeral(amount).format('0,0');
+        return numeral(amount).format('0,0.00');
     }
 
     $scope.selectDate = function (date) {

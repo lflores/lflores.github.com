@@ -111,6 +111,7 @@ angular.module('e-invoice.services')
 
         //GApi.load('myApiName', 'v1', BASE);
         GApi.load('drive', 'v3'); // for google api (https://developers.google.com/apis-explorer/)
+        //GApi.load('upload.drive', 'v3')
 
         GAuth.setClient(CLIENT)
             // default scope is only https://www.googleapis.com/auth/userinfo.email

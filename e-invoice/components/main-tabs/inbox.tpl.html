@@ -6,9 +6,11 @@
             <span ng-hide="!counter.hasMore">Scroll to discover more items</span>
             <span ng-hide="counter.hasMore">These are all items</span>
         </md-tooltip>
+        <div ngf-drop ngf-select ng-model="files" class="drop-box" ngf-drag-over-class="'dragover'" ngf-multiple="true" ngf-allow-dir="true" accept="image/*,application/pdf" ngf-pattern="'image/*,application/pdf'">Drop pdfs or images here or click to upload</div>
+        <div ngf-no-file-drop>File Drag/Drop is not supported for this browser</div>
     </md-subheader>
 </md-content>
 <md-content layout-xs="column" layout-gt-sm="row">
     <file-list data="data" counter="counter" flex-xs="100" flex-gt-sm="50"></file-list>
-    <file-detail file="data" flex-xs="100" flex-gt-sm="50"></file-detail>
+    <file-detail file="data" flex-xs="100" flex-gt-sm="50" on-update="$ctrl.updateFile(fileUpdate)"></file-detail>
 </md-content>

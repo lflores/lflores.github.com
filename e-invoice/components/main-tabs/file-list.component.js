@@ -24,6 +24,7 @@ angular
         templateUrl: "components/main-tabs/file-list.tpl.html",
         controller: function ($scope, GAuth, GApi, $mdDialog, appConfigService) {
             $scope.list = [];
+            $scope.files = [];
             $scope.nextPageToken = "init";
             $scope.loading = true;
 
@@ -52,7 +53,9 @@ angular
                 visibility: {},
                 starred: {},
                 infolder: {},
-                export: {}
+                export: {},
+                upload: {},
+                remove: {}
             };
 
             $scope.indexGroups = function (data, key) {
@@ -195,7 +198,10 @@ angular
                                         var groups = d3.nest()
                                             .key(function (d) {
                                                 if (!d.appProperties || !d.appProperties[ctrl.grouping]) {
-                                                    return "";
+                                                    return d.name;
+                                                }
+                                                if (ctrl.grouping === "filename") {
+
                                                 }
                                                 if (ctrl.grouping === "expirationDate") {
                                                     return new Date(d.appProperties[ctrl.grouping]).getFullYear();
@@ -254,6 +260,32 @@ angular
                 $scope.refresh();
             });
 
+            $scope.$on("file-updated", function (event, fileU) {
+                var index = -1;
+                $scope.infiniteItems.list.filter(function (file, i) {
+                    if (fileU.id === file.id) {
+                        index = i;
+                        return true;
+                    }
+                    return false;
+                });
+                $scope.infiniteItems.list[index].appProperties = fileU.appProperties;
+                //ctrl.data = fileU;
+            });
+
+            $scope.$on("files-added", function (event, files) {
+                $scope.resetInfiniteItems();
+                $scope.loading = true;
+                ctrl.counter.loaded = 0;
+                ctrl.counter.hasMore = true;
+                ctrl.counter.filtered = false;
+                ctrl.data = null;
+            });
+
+            $scope.$on("file-removed", function (event, fileId) {
+                $scope.actions.remove.action(fileId);
+            });
+
             $scope.actions.visibility.icon = function (file) {
                 if (!file) {
                     return;
@@ -284,11 +316,7 @@ angular
                             status: null
                         }
                     }).then(function (result) {
-                        $scope.list = $scope.list.filter(function (item) {
-                            return item.id !== file.id;
-                        });
-                        ctrl.counter.loaded--;
-                        ctrl.data = null;
+                        $scope.actions.remove.action(result.id);
                     }, function (err) {
 
                     });
@@ -351,16 +379,10 @@ angular
                         parent: angular.element(document.body)
                     })
                     $mdDialog.show(confirm).then(function (message) {
-                        //$scope.status = 'You decided to get rid of your debt.';
-                        //console.log(message);
                         GApi.executeAuth('drive', 'files.delete', {
                             fileId: file.id
                         }).then(function (result) {
-                            $scope.list = $scope.list.filter(function (item) {
-                                return item.id !== file.id;
-                            });
-                            ctrl.counter.loaded--;
-                            ctrl.data = null;
+                            $scope.actions.remove.action(result.id);
                         }, function (err) {
                             console.log("Error :(");
                         });
@@ -383,11 +405,7 @@ angular
                         fileId: file.id,
                         trashed: true
                     }).then(function (result) {
-                        $scope.list = $scope.list.filter(function (item) {
-                            return item.id !== file.id;
-                        });
-                        ctrl.counter.loaded--;
-                        ctrl.data = null;
+                        $scope.actions.remove.action(result.id);
                     }, function (err) {
                         console.log("Error :(");
                     });
@@ -414,7 +432,6 @@ angular
             $scope.actions.export.action = function (file, evt) {
                 //para desarrollar
             };
-
 
             $scope.actions.infolder.icon = function (file) {
                 if (!file) {
@@ -453,6 +470,11 @@ angular
                 return true;
             }
 
+            /**
+            Funcion que cambia el estado del archivo
+            * Si está en el inbox lo archiva
+            * Si está archivado, lo vuelve al inbox
+            */
             $scope.actions.infolder.action = function (file, evt) {
                 var params = {
                     fileId: file.id
@@ -467,51 +489,20 @@ angular
                         status: null
                     };
                     GApi.executeAuth('drive', 'files.update', params).then(function (result) {
-                        var index = -1;
-                        $scope.list = $scope.list.filter(function (item, i) {
-                            if (item.id === file.id) {
-                                index = i;
-                                return false;
-                            }
-                            return true;
-                        })
-                        ctrl.counter.loaded--;
-                        $scope.infiniteItems.numLoaded_--;
-
-                        if ($scope.list.length > index) {
-                            ctrl.data = $scope.list[index];
-                        } else {
-                            ctrl.data = null;
-                        }
+                        $scope.actions.remove.action(result.id);
                     }, function (err) {
                         console.log("Error :(");
                     });
                 } else {
                     //tengo que ver a que carpeta corresponde, si la default o una de archivados
                     appConfigService.folder(new Date(file.appProperties.expirationDate).getFullYear(), function (folderId) {
-                        //params.removeParents = appConfigService.folders.join(",");
                         params.removeParents = appConfigService.folderId;
                         params.addParents = folderId;
-                        //params.addParents = appConfigService.folderId;
                         params.appProperties = {
                             status: "archived"
                         }
                         GApi.executeAuth('drive', 'files.update', params).then(function (result) {
-                            var index = -1;
-                            $scope.list = $scope.list.filter(function (item, i) {
-                                if (item.id === file.id) {
-                                    index = i;
-                                    return false;
-                                }
-                                return true;
-                            })
-                            ctrl.counter.loaded--;
-                            $scope.infiniteItems.numLoaded_--;
-                            if ($scope.list.length > index) {
-                                ctrl.data = $scope.list[index];
-                            } else {
-                                ctrl.data = null;
-                            }
+                            $scope.actions.remove.action(result.id);
                         }, function (err) {
                             console.log("Error :(");
                         });
@@ -547,18 +538,37 @@ angular
                     file.starred = !file.starred;
                     //Si es la vista de starred, lo elimino de la lista
                     if (ctrl.type === "starred") {
-                        var index = -1;
-                        for (var i = 0; i < $scope.list.length; i++) {
-                            if ($scope.list[i].id === file.id) {
-                                index = i;
-                            }
-                        }
-                        $scope.list.splice(index, 1);
-                        ctrl.counter.loaded--;
+                        $scope.actions.remove.action(result.id);
                     }
                 }, function (err) {
                     console.log("Error :(");
                 });
+            };
+            /**
+            Este metodo remueve un item según el fileId y actualiza los items cargados 
+            */
+            $scope.actions.remove.action = function (fileId) {
+                var index = -1;
+                $scope.list.filter(function (item, i) {
+                    if (item.id === fileId) {
+                        index = i;
+                        return false;
+                    }
+                    return true;
+                });
+                if (index > -1) {
+                    $scope.list.splice(index, 1);
+                    ctrl.counter.loaded--;
+                    $scope.infiniteItems.numLoaded_--;
+                }
+
+                if ($scope.list.length > index) {
+                    ctrl.data = $scope.list[index];
+                } else if (index >= $scope.list.length && $scope.list.length > 0) {
+                    ctrl.data = $scope.list[$scope.list.length - 1];
+                } else {
+                    ctrl.data = null;
+                }
             };
         }
     });

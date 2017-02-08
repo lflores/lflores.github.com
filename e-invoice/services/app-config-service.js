@@ -6,7 +6,7 @@
 //    }]);
 var defaultConfig = {
     "folder": "Pagos",
-    "dateFormat": "dd/mm/yyyy",
+    "dateFormat": "DD/MM/YYYY",
     "language": "en",
     "names": ["Fibertel", "Edenor", "AySA", "Personal", "Municipio de Hurlingham", "OSDE", "Plan Rombo", "Movistar", "Gas Natural Fenosa", "Victoria Seguros", "Inst. Cristo Obrero"]
 };

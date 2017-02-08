@@ -1,0 +1,66 @@
+{
+  "name": "gdrive-appdata",
+  "version": "3.2.1",
+  "description": "Javascript utility to store application data to Google Drive app data folder",
+  "main": "src/js/main.js",
+  "scripts": {
+    "test": "istanbul cover jasmine"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adrianbota/gdrive-appdata.git"
+  },
+  "keywords": [
+    "google",
+    "drive",
+    "app",
+    "data",
+    "load",
+    "save",
+    "store"
+  ],
+  "author": {
+    "name": "Adrian Bota"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/adrianbota/gdrive-appdata/issues"
+  },
+  "homepage": "https://github.com/adrianbota/gdrive-appdata#readme",
+  "devDependencies": {
+    "abota-build": "^0.2.0",
+    "deferred": "^0.7.5",
+    "istanbul": "^0.4.5",
+    "jasmine": "^2.5.2"
+  },
+  "dependencies": {
+    "index-template": "^1.0.1",
+    "lodash": "^4.13.1"
+  },
+  "gitHead": "ca0a2971641b2a9eaaa9b00c66a664c355eb92f8",
+  "_id": "gdrive-appdata@3.2.1",
+  "_shasum": "74d4911a22dce324ad2c62e0bebc84e451d10820",
+  "_from": "gdrive-appdata@latest",
+  "_npmVersion": "3.10.9",
+  "_nodeVersion": "4.4.3",
+  "_npmUser": {
+    "name": "adrianbota",
+    "email": "adrianb3286@yahoo.com"
+  },
+  "dist": {
+    "shasum": "74d4911a22dce324ad2c62e0bebc84e451d10820",
+    "tarball": "https://registry.npmjs.org/gdrive-appdata/-/gdrive-appdata-3.2.1.tgz"
+  },
+  "maintainers": [
+    {
+      "name": "adrianbota",
+      "email": "adrianb3286@yahoo.com"
+    }
+  ],
+  "_npmOperationalInternal": {
+    "host": "packages-12-west.internal.npmjs.com",
+    "tmp": "tmp/gdrive-appdata-3.2.1.tgz_1477875123365_0.595589792355895"
+  },
+  "directories": {},
+  "_resolved": "https://registry.npmjs.org/gdrive-appdata/-/gdrive-appdata-3.2.1.tgz"
+}
