@@ -1,12 +1,12 @@
 <md-content>
-    <md-subheader class="md-primary">Inbox
+    <md-subheader class="md-primary">{{'inbox.subtitle'|translate}}
         <md-badge class="md-raised md-button md-primary">{{counter.loaded}}</md-badge>
         <span ng-hide="!counter.hasMore">...</span>
         <md-tooltip>
-            <span ng-hide="!counter.hasMore">Scroll to discover more items</span>
-            <span ng-hide="counter.hasMore">These are all items</span>
+            <span ng-hide="!counter.hasMore">{{'inbox.caret.partial'|translate}}</span>
+            <span ng-hide="counter.hasMore">{{'inbox.caret.all'|translate}}</span>
         </md-tooltip>
-        <div ngf-drop ngf-select ng-model="files" class="drop-box" ngf-drag-over-class="'dragover'" ngf-multiple="true" ngf-allow-dir="true" accept="image/*,application/pdf" ngf-pattern="'image/*,application/pdf'">Drop pdfs or images here or click to upload</div>
+        <div ngf-drop ngf-select ng-model="files" class="drop-box" ngf-drag-over-class="'dragover'" ngf-multiple="true" ngf-allow-dir="true" accept="image/*,application/pdf" ngf-pattern="'image/*,application/pdf'">{{'inbox.drop-space'|translate}}</div>
         <div ngf-no-file-drop>File Drag/Drop is not supported for this browser</div>
     </md-subheader>
 </md-content>

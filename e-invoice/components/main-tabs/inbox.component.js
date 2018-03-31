@@ -6,7 +6,7 @@ angular
         controller: InboxController,
     });
 
-function InboxController($scope, $rootScope, $element, GAuth, GApi, $mdDialog, appConfigService, Upload) {
+function InboxController($scope, $rootScope, $element, GAuth, GApi, $mdDialog, appConfig, Upload) {
     //$scope.tags = [];
     var ctrl = this;
     $scope.keys = [186]
@@ -30,24 +30,40 @@ function InboxController($scope, $rootScope, $element, GAuth, GApi, $mdDialog, a
         $scope.refresh();
     });
 
+    $scope.$on("start-app", function (evt) {
+        $scope.folderId = appConfig.folderId;
+    });
+    $scope.folderId = appConfig.folderId;
+
     $scope.$watch('files', function () {
-        $scope.upload($scope.files);
+        $scope.upload($scope.files, $scope.folderId);
     });
 
-    $scope.upload = function (files) {
+    $scope.upload = function (files, folderId) {
         if (files.length === 0) {
             return;
         }
-
+        var created = [];
         for (var i = 0; i < files.length; i++) {
             var file = files[i];
             if (!file.$error) {
-                insertFile(file, function (resp) {
-                    //console.log(resp);
+                insertFile(file, folderId, function (resp) {
+                    $rootScope.$broadcast("files-add", resp);
+                    created.push(resp);
+                    if (created.length === files.length) {
+                        $rootScope.$broadcast("files-added", created);
+                    }
                 });
             }
         }
-        $rootScope.$broadcast("files-added");
+    }
+
+    $scope.uploadFile = function (file, folderId) {
+        if (!file.$error) {
+            insertFile(file, folderId, function (resp) {
+                files.splice(0, 1);
+            });
+        }
     }
 
 
@@ -62,7 +78,7 @@ function InboxController($scope, $rootScope, $element, GAuth, GApi, $mdDialog, a
  * @param {File} fileData File object to read data from.
  * @param {Function} callback Function to call when the request is complete.
  */
-function insertFile(fileData, callback) {
+function insertFile(fileData, parent, callback) {
     const boundary = '-------314159265358979323846';
     const delimiter = "\r\n--" + boundary + "\r\n";
     const close_delim = "\r\n--" + boundary + "--";
@@ -95,6 +111,7 @@ function insertFile(fileData, callback) {
                 'uploadType': 'multipart'
             },
             name: fileData.name,
+            parents: [parent],
             originalFileName: fileData.name,
             'headers': {
                 'Content-Type': 'multipart/mixed; boundary="' + boundary + '"'

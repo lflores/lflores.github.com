@@ -1,6 +1,6 @@
 {
   "name": "numeral",
-  "version": "2.0.4",
+  "version": "2.0.6",
   "description": "Format and manipulate numbers.",
   "homepage": "http://numeraljs.com",
   "author": {
@@ -22,7 +22,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/adamwdraper/Numeral-js.git"
+    "url": "https://github.com/adamwdraper/Numeral-js"
   },
   "bugs": {
     "url": "https://github.com/adamwdraper/Numeral-js/issues"
@@ -54,31 +54,6 @@
     "test": "grunt"
   },
   "ender": "./ender.js",
-  "_id": "numeral@2.0.4",
-  "_from": "numeral@latest",
-  "gitHead": "a7a2dedde724ee6c74cf3370b958c06d19c54659",
-  "_shasum": "545a0c709e090a9cf79bebec802b93f60061f038",
-  "_npmVersion": "3.10.9",
-  "_nodeVersion": "6.9.2",
-  "_npmUser": {
-    "name": "adamwdraper",
-    "email": "adamwdraper@gmail.com"
-  },
-  "dist": {
-    "shasum": "545a0c709e090a9cf79bebec802b93f60061f038",
-    "tarball": "https://registry.npmjs.org/numeral/-/numeral-2.0.4.tgz"
-  },
-  "maintainers": [
-    {
-      "name": "adamwdraper",
-      "email": "adamwdraper@gmail.com"
-    }
-  ],
-  "_npmOperationalInternal": {
-    "host": "packages-12-west.internal.npmjs.com",
-    "tmp": "tmp/numeral-2.0.4.tgz_1482352427047_0.41110660904087126"
-  },
-  "directories": {},
-  "_resolved": "https://registry.npmjs.org/numeral/-/numeral-2.0.4.tgz",
-  "readme": "ERROR: No README data found!"
+  "_id": "numeral@1.5.4",
+  "_from": "numeral"
 }

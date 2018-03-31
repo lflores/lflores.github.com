@@ -1,10 +1,10 @@
 <md-content layout="row">
-    <md-subheader class="md-primary">Archived
+    <md-subheader class="md-primary">{{'archived.subtitle'|translate}}
         <md-badge class="md-raised md-button md-primary">{{counter.loaded}}</md-badge>
         <span ng-hide="!counter.hasMore">...
             <md-tooltip>
-            <span ng-hide="!counter.hasMore">Scroll to discover more items</span>
-        <span ng-hide="counter.hasMore">These are all items</span>
+            <span ng-hide="!counter.hasMore" translate="inbox.caret.partial">Scroll to discover more items</span>
+        <span ng-hide="counter.hasMore" translate="inbox.caret.all">These are all items</span>
         </md-tooltip>
         </span>
         <md-icon class="md-primary md-raised" ng-show="counter.filtered">filter_list

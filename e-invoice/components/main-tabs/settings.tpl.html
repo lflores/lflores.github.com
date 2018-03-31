@@ -1,6 +1,6 @@
+<md-subheader class="md-primary">User configuration</md-subheader>
 <div layout-gt-sm="row">
     <form name="settings">
-        <md-subheader>User configuration</md-subheader>
         <div layout-gt-sm="row" ng-show="appConfig">
             <md-input-container class="md-block" flex-gt-sm>
                 <label>Date format preferences</label>
@@ -46,6 +46,26 @@
                         <!--                        <em>(fruit)</em>-->
                     </md-chip-template>
                 </md-chips>
+            </md-input-container>
+        </div>
+        <div layout-gt-sm="row" ng-show="appConfig">
+            <md-input-container class="md-block" flex-gt-sm ng-model="theme">
+                <label> Theme Selection </label>
+                <md-radio-group class="layout-row" ng-model="theme" ng-change="changeTheme()">
+                    <md-radio-button ng-repeat="d in themes" ng-value="d.value" aria-label="{{ d.label }}" class="md-primary">
+                        {{ d.label }}
+                    </md-radio-button>
+                </md-radio-group>
+            </md-input-container>
+        </div>
+        <div layout-gt-sm="row" ng-show="appConfig">
+            <md-input-container class="md-block" flex-gt-sm ng-model="language">
+                <label translate="settings.language.title">Language preference</label>
+                <md-radio-group class="layout-row" ng-model="languages" ng-change="changeLanguage(l.value)">
+                    <md-radio-button ng-repeat="l in languages" ng-value="l.value" aria-label="{{ l.key | translate }}" class="md-primary">
+                        {{ d.key |translate }}
+                    </md-radio-button>
+                </md-radio-group>
             </md-input-container>
         </div>
     </form>

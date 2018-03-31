@@ -31,8 +31,13 @@
     <script src="bower_components/angular-aria/angular-aria.min.js" type="text/javascript"></script>
     <script src="bower_components/angular-messages/angular-messages.min.js" type="text/javascript"></script>
     <script src="bower_components/angular-material/angular-material.js" type="text/javascript"></script>
+
     <script src="bower_components/angular-google-gapi/dist/angular-google-gapi.js" type="text/javascript"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
+    <!-- i18n-->
+    <script src="bower_components/angular-translate/angular-translate.min.js"></script>
+    <script src="bower_components/angular-dynamic-locale/dist/tmhDynamicLocale.min.js"></script>
+
     <script src="bower_components/moment/min/moment-with-locales.js"></script>
     <script src="//cdn.jsdelivr.net/angular-material-icons/0.4.0/angular-material-icons.min.js"></script>
     <script src="bower_components/angular-filter/dist/angular-filter.js"></script>
@@ -40,8 +45,8 @@
     <script src="bower_components/numeral/min/locales.min.js"></script>
     <script src="bower_components/d3/d3.min.js"></script>
     <script src="bower_components/ng-file-upload/ng-file-upload.min.js"></script>
-
     <script src="bower_components/gdrive-appdata/dist/gdad.js"></script>
+
 
 </head>
 
@@ -72,7 +77,7 @@
                         <div class="inset">
                             <md-icon aria-label="{{item.title}}" aria-hidden="false">{{item.icon}}</md-icon>
                         </div>
-                        <div class="inset">{{item.title}}
+                        <div class="inset" translate="{{item.key}}">{{item.title}}
                         </div>
                     </md-item-content>
                 </md-list-item>
@@ -83,8 +88,7 @@
                         <div class="inset">
                             <md-icon aria-label="{{item.title}}" aria-hidden="false">{{item.icon}}</md-icon>
                         </div>
-                        <div class="inset">{{item.title}}
-                        </div>
+                        <div class="inset" translate="{{item.key}}">{{item.title}}</div>
                     </md-item-content>
 
                 </md-list-item>
@@ -140,8 +144,8 @@
 
     <script src="app.js"></script>
 
-    <script src="services/app-config-service.js"></script>
-    <script src="services/login-service.js"></script>
+    <script src="services/app-config.service.js"></script>
+    <script src="services/login.service.js"></script>
     <script src="services/text-discovery.service.js"></script>
 
     <script src="components/version/version.js"></script>

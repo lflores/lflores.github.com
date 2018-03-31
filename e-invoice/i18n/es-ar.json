@@ -1,0 +1,63 @@
+{
+    "codes": {
+        "\u00E1": "á",
+        "\u00E9": "é",
+        "\u00ED": "í",
+        "\u00F3": "ó",
+        "\u00FA": "ú"
+    },
+    "general": {
+        "list-no-items": "No se encontraron items ac\u00E1"
+    },
+    "menu": {
+        "inbox": "Bandeja",
+        "archived": "Archivar",
+        "classified": "Clasificados",
+        "ignored": "Ignorados",
+        "trashed": "Eliminados",
+        "starred": "Destacados",
+        "settings": "Configuraci\u00F3n",
+        "management": "Management"
+    },
+    "list": {
+        "tooltip": {
+            "trash-it": "Eliminar",
+            "visible-on": "Hacerlo invisible",
+            "visible-off": "Hacerlo visible",
+            "archive": "Archivarlo",
+            "unarchive": "Volver a bandeja",
+            "favorite": "Marcar como favorito",
+            "unfavorite": "Desmarcar favorito",
+            "dowload-zip": "Descargar zip",
+            "rename-file": "Renombrar archivos"
+        }
+    },
+    "detail": {
+        "unselected": "Seleccione un archivo para poder ver el detalle",
+        "button": {
+            "save": "Guardar",
+            "archive": "Archivar",
+            "lucky": "Tendr\u00E9 suerte"
+        }
+    },
+    "inbox": {
+        "subtitle": "Bandeja",
+        "caret": {
+            "all": "Son todos los items",
+            "partial": "Deslizar para encontrar mas items"
+        },
+        "drop-space": "Arrastre pdf o im\u00E1genes, o haga clic para subirlos"
+    },
+    "grouping": {
+        "expiration-date": "Fecha Expiración",
+        "file-type": "Tipo Archivo",
+        "file-name": "Nombre Archivo",
+        "service-name": "Nombre Servicio"
+    },
+    "archived": {
+        "subtitle": "Archivados"
+    },
+    "trashed": {
+        "subtitle": "Trashed"
+    }
+}

@@ -1,0 +1,52 @@
+{
+    "general": {
+        "list-no-items": "No items"
+    },
+    "menu": {
+        "inbox": "Inbox",
+        "archived": "Archived",
+        "classified": "Classified",
+        "ignored": "Ignored",
+        "trashed": "Trashed",
+        "starred": "Favorites",
+        "settings": "Settings",
+        "management": "Management"
+    },
+    "list": {
+        "tooltip": {
+            "trash-it": "Eliminar",
+            "visible-on": "Hacerlo invisible",
+            "visible-off": "Hacerlo visible",
+            "archive": "Archivarlo",
+            "unarchive": "Volver a bandeja",
+            "favorite": "Marcar como favorito",
+            "unfavorite": "Desmarcar favorito",
+            "dowload-zip": "Descargar zip",
+            "rename-file": "Renombrar archivos"
+        }
+    },
+    "detail": {
+        "unselected": "Select a file in file list to see details",
+        "button": {
+            "archive": "Archive",
+            "save": "Save",
+            "lucky": "I'm feeling lucky"
+        }
+    },
+    "inbox": {
+        "subtitle": "Inbox",
+        "drop-space": "Drop pdfs or images here or click to upload"
+    },
+    "grouping": {
+        "expiration-date": "Fecha Expiración",
+        "file-type": "Tipo Archivo",
+        "file-name": "Nombre Archivo",
+        "service-name": "Nombre Servicio"
+    },
+    "archived": {
+        "subtitle": "Archivados"
+    },
+    "trashed": {
+        "subtitle": "Trashed"
+    }
+}

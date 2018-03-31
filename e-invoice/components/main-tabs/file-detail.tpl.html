@@ -3,17 +3,33 @@
     <md-card-title>
         <md-card-title-text layout="row">
             <span class="file-type">
-                        <md-icon icon="folder" aria-label="folder" ng-hide="detail">folder</md-icon>
-                        <img ng-show="detail" ng-src="{{detail.iconLink}}" aria-label="{{detail.title}}" />
-                    </span>
-            <span>{{detail.name}}</span>
-
+                <md-icon icon="folder" aria-label="folder" ng-hide="detail">folder</md-icon>
+                <img ng-show="detail" ng-src="{{detail.iconLink}}" aria-label="{{detail.title}}" />
+            </span>
+            <span flex-gt-xs>
+                <md-input-container class="md-block">
+                    <label>Filename</label>
+                    <input ng-model="detail.name" ng-disabled="!enabledRename">
+                </md-input-container>
+            </span>
+            <span>
+            <md-button class="md-icon-button md-primary" ng-click="actions.rename.action()" ng-disabled="!metadataForm.$valid&&!enableRename">
+                <md-icon aria-label="mode_edit">{{actions.rename.icon()}}</md-icon>
+                <md-tooltip>Rename file</md-tooltip>
+            </md-button>
+            </span>
+            <span>
+            <md-button class="md-icon-button md-primary" ng-click="actions.rename.action()" ng-disabled="!metadataForm.$valid&&!enableRename">
+                <md-icon aria-label="brush">brush</md-icon>
+                <md-tooltip>Fill Filename</md-tooltip>
+            </md-button>
+            </span>
         </md-card-title-text>
     </md-card-title>
     <md-card-content ng-hide="detail">
         <div layout="column" layout-align="center center">
             <md-icon aria-label="folder" ng-hide="detail" class="md-hue-5">info</md-icon>
-            <p>Select a file in file list to see details</p>
+            <p>{{'detail.unselected'|translate}}</p>
         </div>
     </md-card-content>
     <md-card-content ng-hide="!detail">
@@ -61,21 +77,22 @@
                                 <div ng-message="required">Amount is required.</div>
                             </div>
                         </md-input-container>
+                    </form>
                 </md-content>
             </md-tab>
-            </form>
+
         </md-tabs>
     </md-card-content>
     <md-card-actions layout="row" layout-align="end center">
         <!--        <md-button class="md-raised md-warn" ng-click="removeTags()" ng-disabled="!detail">Remove</md-button>-->
-        <md-button class="md-raised md-primary" ng-click="actions.archive.action()" ng-show="actions.archive.visibility()" ng-disabled="!metadataForm.$valid">Archive
+        <md-button class="md-raised md-primary" ng-click="actions.archive.action()" ng-show="actions.archive.visibility()" ng-disabled="!metadataForm.$valid">{{'detail.button.archive'|translate}}
             <md-tooltip>Save file info and archive the file</md-tooltip>
         </md-button>
-        <md-button class="md-raised md-primary md-hue-1" ng-click="actions.save.action()" ng-show="actions.save.visibility()" ng-disabled="!metadataForm.$valid">Save
+        <md-button class="md-raised md-primary md-hue-1" ng-click="actions.save.action()" ng-show="actions.save.visibility()" ng-disabled="!metadataForm.$valid">{{'detail.button.save'|translate}}
             <md-tooltip>Save file info</md-tooltip>
         </md-button>
         <!--        <md-button ng-click="closeDetail()">Close</md-button>-->
-        <md-button class="md-raised" ng-click="actions.lucky.action()" ng-disabled="!detail">I'm feeling Lucky
+        <md-button class="md-raised" ng-click="actions.lucky.action()" ng-disabled="!detail">{{'detail.button.lucky'|translate}}
             <md-tooltip>Try to autofill file info</md-tooltip>
         </md-button>
     </md-card-actions>

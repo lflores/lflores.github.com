@@ -15,6 +15,20 @@
             </div>
             <md-content layout="row" class="field-data">
                 <md-input-container>
+                    <label>Names</label>
+                    <input type="text" ng-model="result.name.name">
+                </md-input-container>
+                <md-list flex>
+                    <md-list-item ng-repeat="name in names" ng-click="selectName(name)">
+                        <div class="md-list-item-text" layout="column">
+                            <div>{{ name.name }}</div>
+                            <div class="md-secondary">{{ name.text }}</div>
+                        </div>
+                    </md-list-item>
+                </md-list>
+            </md-content>
+            <md-content layout="row" class="field-data">
+                <md-input-container>
                     <label>Expiration Date</label>
                     <md-datepicker ng-model="result.expirationDate.date" disabled>
                         <div class="validation-messages" ng-messages="multiple-matches.dateField.$error">
@@ -45,6 +59,7 @@
                     </md-list-item>
                 </md-list>
             </md-content>
+
         </md-dialog-content>
         <md-dialog-actions layout="row">
             <span flex></span>

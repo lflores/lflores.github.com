@@ -22,7 +22,7 @@ angular
             search: '@'
         },
         templateUrl: "components/main-tabs/file-list.tpl.html",
-        controller: function ($scope, GAuth, GApi, $mdDialog, appConfigService) {
+        controller: function ($scope, GAuth, GApi, $mdDialog, $mdToast, appConfig) {
             $scope.list = [];
             $scope.files = [];
             $scope.nextPageToken = "init";
@@ -91,7 +91,7 @@ angular
                 list: [],
                 // Required.
                 getItemAtIndex: function (index) {
-                    if (!appConfigService.getAppConfig() || !appConfigService.folderId) {
+                    if (!appConfig.appStarted) {
                         return null;
                     }
                     if (index > this.numLoaded_) {
@@ -124,16 +124,14 @@ angular
                         } else {
                             _query += " and trashed = false";
                         }
+                        //_query += " and parents != ''";
                         switch (ctrl.type) {
                             case 'inbox':
-                                for (var i = 0; i < appConfigService.folders.length; i++) {
-                                    _query += " and not '" + appConfigService.folders[i] + "' in parents"
-                                }
-                                //_query += " and not '" + appConfigService.folderId + "' in parents";
-                                //_query += " and not appProperties has {key='status' and value=''}";
+                                _query += " and '" + appConfig.folderId + "' in parents ";
+                                //_query += " and ( 'root' in parents or '" + appConfig.folderId + "' in parents )";
+                                _query += " and not appProperties has {key='status' and value=''}";
                                 _query += " and not appProperties has {key='status' and value='invisible'}";
                                 _query += " and not appProperties has {key='status' and value='archived'}";
-                                //_query += " and not appProperties has {key='status' and value='classified'}";
                                 break;
                             case 'starred':
                                 _query += " and not appProperties has {key='status' and value='invisible'}";
@@ -143,28 +141,19 @@ angular
                                 _query += " and appProperties has {key='status' and value='invisible'}";
                                 break;
                             case 'classified':
-                                //_query += " and appProperties has {key='status' and value='classified'}";
                                 _query += " and not appProperties has {key='status' and value='invisible'}";
-                                //_query += " and appProperties has {key='type' and value=''}";
                                 _query += " and ( appProperties has {key='type' and value='invoice'} or";
                                 _query += " appProperties has {key='type' and value='receipt'})";
-                                //_query += " and ( appProperties has {key='type' and value='true'} or ";
-                                //_query += " appProperties has {key='type' and value='false'} )";
                                 break;
                             case 'archived':
-                                //_query += " and not appProperties has {key='status' and value='invisible'}";
-                                //_query += " and appProperties/status and appProperties/status != ''";
-                                _query += " and appProperties has {key='status' and value='archived'}";
-                                //_query += " and '" + appConfigService.folderId + "' in parents";
-                                for (var i = 0; i < appConfigService.folders.length; i++) {
-                                    if (appConfigService.folders.length == 1) {
-                                        _query += " and '" + appConfigService.folderId + "' in parents";
-                                    } else {
-                                        _query += " and ('";
-                                        _query += appConfigService.folders.join("' in parents or '");
-                                        _query += "' in parents)";
-                                    }
+                                _query += " and (";
+                                var folders = [];
+                                for (var i = 0; i < appConfig.folders.length; i++) {
+                                    folders.push("'" + appConfig.folders[i] + "' in parents");
                                 }
+                                _query += folders.join(" or ");
+                                _query += ")";
+                                _query += " and appProperties has {key='status' and value='archived'}";
                                 break;
                         }
 
@@ -175,10 +164,10 @@ angular
                         }
 
                         var params = {
-                            'pageSize': this.length,
-                            'orderBy': $scope._searchText == null ? "modifiedTime desc" : null,
-                            'fields': "nextPageToken, files(id,name,createdTime,iconLink,thumbnailLink,properties,appProperties,starred,owners,trashed,parents)",
-                            'q': _query
+                            pageSize: this.length,
+                            orderBy: $scope._searchText == null ? "modifiedTime desc" : null,
+                            fields: "nextPageToken, files(id,name,createdTime,iconLink,thumbnailLink,properties,appProperties,starred,owners,trashed,parents)",
+                            q: _query
                         };
 
                         if (typeof $scope.nextPageToken != 'undefined' && $scope.nextPageToken != 'init') {
@@ -257,7 +246,7 @@ angular
             }
 
             $scope.$on("start-app", function () {
-                $scope.refresh();
+                $scope.appStarted = true;
             });
 
             $scope.$on("file-updated", function (event, fileU) {
@@ -269,11 +258,24 @@ angular
                     }
                     return false;
                 });
+                $scope.infiniteItems.list[index].name = fileU.name;
                 $scope.infiniteItems.list[index].appProperties = fileU.appProperties;
                 //ctrl.data = fileU;
             });
-
+            /*disparado cuando inicia el upload*/
+            $scope.$on("files-add", function (event, file) {
+                //$scope.loading = true;
+                $scope.list.splice(0, 0, file);
+                ctrl.counter.loaded = $scope.list.length;
+            });
+            /*disparado cuando ya se crearon todos los archivos el upload*/
             $scope.$on("files-added", function (event, files) {
+                $mdToast.show(
+                    $mdToast.simple()
+                    .textContent('Todos los archivos fueron creados!')
+                    .position("top right")
+                    .hideDelay(3000)
+                );
                 $scope.resetInfiniteItems();
                 $scope.loading = true;
                 ctrl.counter.loaded = 0;
@@ -382,7 +384,7 @@ angular
                         GApi.executeAuth('drive', 'files.delete', {
                             fileId: file.id
                         }).then(function (result) {
-                            $scope.actions.remove.action(result.id);
+                            $scope.actions.remove.action(file.id);
                         }, function (err) {
                             console.log("Error :(");
                         });
@@ -425,20 +427,25 @@ angular
                 if (!file) {
                     return "";
                 }
-                //El tooltip podría cambiar según por lo que esté agrupado
-                return "Export year as zip";
+                return "Export " + ctrl.grouping + " as zip";
             }
 
+
+            /*
+            Exporta el contenido del grupo como zip
+            */
             $scope.actions.export.action = function (file, evt) {
                 //para desarrollar
             };
-
+            /*
+            Funciones asociadas al boton de movimiento entre carpetas
+            */
             $scope.actions.infolder.icon = function (file) {
                 if (!file) {
                     return "";
                 }
 
-                if (appConfigService.isInFolders(file.parents)) {
+                if (appConfig.isInFolders(file.parents)) {
                     return "unarchived";
                 }
                 return "archived";
@@ -448,7 +455,7 @@ angular
                 if (!file) {
                     return "";
                 }
-                if (appConfigService.isInFolders(file.parents)) {
+                if (appConfig.isInFolders(file.parents)) {
                     return "Unarchive";
                 }
                 if (!file.appProperties || !file.appProperties.expirationDate) {
@@ -470,7 +477,7 @@ angular
                 return true;
             }
 
-            /**
+            /*
             Funcion que cambia el estado del archivo
             * Si está en el inbox lo archiva
             * Si está archivado, lo vuelve al inbox
@@ -481,8 +488,8 @@ angular
                 };
 
                 if (ctrl.type === "archived") {
-                    params.removeParents = appConfigService.folders.join(",");
-                    params.addParents = appConfigService.folderId;
+                    params.removeParents = appConfig.folders.join(",");
+                    params.addParents = appConfig.folderId;
                     //params.removeParents += ",root";
 
                     params.appProperties = {
@@ -495,8 +502,8 @@ angular
                     });
                 } else {
                     //tengo que ver a que carpeta corresponde, si la default o una de archivados
-                    appConfigService.folder(new Date(file.appProperties.expirationDate).getFullYear(), function (folderId) {
-                        params.removeParents = appConfigService.folderId;
+                    appConfig.folder(new Date(file.appProperties.expirationDate).getFullYear(), function (folderId) {
+                        params.removeParents = appConfig.folderId + ",root";
                         params.addParents = folderId;
                         params.appProperties = {
                             status: "archived"

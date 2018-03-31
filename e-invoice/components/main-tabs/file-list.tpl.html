@@ -1,6 +1,6 @@
 <md-virtual-repeat-container>
-    <md-subheader ng-show="infiniteItems.numLoaded_==0">No items</md-subheader>
-    <md-list-item md-virtual-repeat="file in infiniteItems" md-on-demand class="repeated-item" flex ng-click="select(file)" ng-class="{'md-active': file.id === $ctrl.data.id,'header': file.header}" ng-hide="!file" ng-animate>
+    <md-subheader ng-show="infiniteItems.numLoaded_==0">{{'general.list-no-items'|translate}}</md-subheader>
+    <md-list-item md-virtual-repeat="file in infiniteItems" md-on-demand class="repeated-item" flex ng-click="select(file)" ng-class="{'md-active': file.id === $ctrl.data.id && !file.header,'header': file.header}" ng-hide="!file" ng-animate>
         <span class="file-type" ng-hide="file.header">
                     <img ng-src="{{file.iconLink}}" aria-label="{{file.name}}"/>
                 </span>

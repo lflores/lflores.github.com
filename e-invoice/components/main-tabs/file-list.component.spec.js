@@ -1,14 +1,17 @@
 'use strict';
 
 describe('file-list-component', function () {
+    var $httpBackend;
     var files;
-    var textDiscovery
+    var textDiscovery;
+    var appConfig;
 
     beforeEach(module('e-invoice'));
 
     beforeEach(inject(function (_textDiscovery_, _$httpBackend_, _$injector_, _$http_) {
         $httpBackend = _$httpBackend_;
         textDiscovery = _textDiscovery_;
+        //appConfig = _appConfig_;
         files = readJSON('files/grouping-files-1.json').files;
     }));
 
@@ -37,7 +40,7 @@ describe('file-list-component', function () {
         expect(groups[groups.length - 2].key).toEqual("2012");
         expect(groups[groups.length - 1].key).toEqual("");
         var flattened = groups.flattened();
-        console.log(groups.print());
+        //console.log(groups.print());
     })
 
     it('check date sort desc', function () {
@@ -59,8 +62,7 @@ describe('file-list-component', function () {
         expect(groups[0].key).toEqual("");
         expect(groups[1].key).toEqual("2012");
         expect(groups[groups.length - 1].key).toEqual("2017");
-
-        console.log(groups.print());
+        //console.log(groups.print());
     });
 
     it('check flattened result', function () {
@@ -100,7 +102,7 @@ describe('file-list-component', function () {
         expect(groups[5].values.length).toEqual(1);
 
         var flattened = groups.flattened();
-        console.log(flattened.print());
+        //console.log(flattened.print());
         expect(flattened.length).toEqual(36);
         expect(flattened[0].name).toEqual("");
         expect(flattened[4].name).toEqual("2012");
