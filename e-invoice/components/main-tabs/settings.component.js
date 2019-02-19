@@ -36,9 +36,12 @@ angular
 
             $scope.language = "es-ar";
 
+            $scope.names = [];
+
 
             $scope.appConfig = appConfig.getAppConfig().then(function (config) {
                 $scope.appConfig = config;
+                $scope.names = config.names;
             }, function (err) {
                 console.log(err);
             });

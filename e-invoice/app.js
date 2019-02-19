@@ -1,5 +1,6 @@
 'use strict';
 var invoiceApp = angular.module('e-invoice', ['ngRoute',
+                                              'ngAria',
                                               'ngAnimate',
                                               'ngMaterial',
                                               'ngMessages',
@@ -73,20 +74,6 @@ angular.module('e-invoice.i18n').run(['$window', "$translate", "tmhDynamicLocale
 }]);
 
 invoiceApp.controller("AppController", ['$scope', "$mdSidenav", "$rootScope", 'loginService', 'appConfig', function ($scope, $mdSidenav, $rootScope, loginService, appConfig) {
-    var ctrl = this;
-    var appData;
-    var userInfo;
-
-    loginService.getUserInfo().then(function (userInfo) {
-        appConfig.getAppConfig().then(function (data) {
-            appData = data;
-        }, function (err) {
-            console.log(err);
-        })
-    }, function (err) {
-        console.log(err);
-    });
-
     $scope.toggleLeft = function () {
         return $mdSidenav('left').toggle();
     }
@@ -109,18 +96,13 @@ invoiceApp.controller("AppController", ['$scope', "$mdSidenav", "$rootScope", 'l
     $scope.$on("app-login", function () {
         appConfig.loadConfig();
     });
-
-    //    $scope.$on("app-config", function () {
-    //        //console.log("app-config completed");
-    //        $scope.userInfo = loginService.getUserInfo();
-    //    });
 }]);
 
 invoiceApp.controller("SideNavController", function ($scope, $location, $mdSidenav, $rootScope, $mdConstant, $translate, loginService) {
     $scope.link = "#!" + $location.path().replace("/", "");
     $scope.keys = [$mdConstant.KEY_CODE.ENTER, $mdConstant.KEY_CODE.COMMA];
     $scope.tags = [];
-    var ctrl = this;
+    //var ctrl = this;
 
     $scope.onmenuclick = function (item) {
         $scope.link = item.link;
@@ -209,45 +191,14 @@ invoiceApp.controller("SideNavController", function ($scope, $location, $mdSiden
                     }];
 
     //$scope.changeLanguage("es-ar");
+    $scope.$watch("userInfo",function(userInfo){
+        if(userInfo == null){
+            return;
+        }
+        $rootScope.$emit("start-app");
+    });
 
-    $scope.$on("start-app", function () {
-        //$scope.userInfo = loginService.getUserInfo();
+    $rootScope.$on("start-app", function () {
 
-        //        $scope.menu = [{
-        //                link: '#!inbox',
-        //                title: 'Inbox',
-        //                icon: 'inbox'
-        //                    },
-        //            {
-        //                link: '#!archived',
-        //                title: 'Archived',
-        //                icon: 'archive'
-        //                    },
-        //            {
-        //                link: '#!classified',
-        //                title: 'Classified',
-        //                icon: 'class'
-        //            },
-        //            {
-        //                link: '#!starred',
-        //                title: 'Favorite',
-        //                icon: 'favorite'
-        //                    },
-        //            {
-        //                link: '#!ignored',
-        //                title: 'Ignored',
-        //                icon: 'visibility_off'
-        //                    }];
-        //        $scope.admin = [
-        //            {
-        //                link: '#!trashed',
-        //                title: 'Trashed',
-        //                icon: 'delete'
-        //                    },
-        //            {
-        //                link: '#!settings',
-        //                title: 'Settings',
-        //                icon: 'settings'
-        //                    }];
     })
 });

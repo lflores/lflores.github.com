@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('e-invoice.services')
-    .service('textDiscovery', ['$window', 'GApi', "appConfig", "$q", function ($window, GApi, appConfig, $q) {
+    .service('textDiscovery', ['$window', 'GApi', "appConfig", "$q","$rootScope", function ($window, GApi, appConfig, $q,$rootScope) {
         var lang = $window.navigator.language || $window.navigator.userLanguage;
         lang = lang.split("-")[0];
         var svr = this;
@@ -9,12 +9,21 @@ angular.module('e-invoice.services')
         //moment.locale(lang);
         moment.locale("es");
         numeral.locale("es");
+        var config;
+        $rootScope.$on("start-app", function () {
+            appConfig.getAppConfig().then(
+                function (cfg) {
+                    config = cfg;
+                },function(err){
+                    console.log(err);
+                });
+        });
 
         this.origins = function (search) {
             if (!search || search.length === 0) {
-                return appConfig.getAppConfig().names;
+                return config.appConfig.names;
             }
-            var names = appConfig.getAppConfig().names.filter(function (item, i) {
+            var names = config.appConfig.names.filter(function (item, i) {
                 if (item.toLowerCase().indexOf(search.toLowerCase()) > -1) {
                     return true;
                 }
@@ -25,7 +34,7 @@ angular.module('e-invoice.services')
 
         this.createOrigin = function (origin) {
             var deferred = $q.defer();
-            appConfig.getAppConfig().names.push(origin);
+            config.appConfig.names.push(origin);
             appConfig.saveConfig().then(
                 function (config) {
                     deferred.resolve(config);
@@ -102,7 +111,6 @@ angular.module('e-invoice.services')
         var dateLineRegex = /^.*(\d{2}[\/\-\.]\d{2}[\/\-\.]\d{2,4}).*$/gm;
         var hora = /\d{2}:\d{2}:\d{2}/g;
         var amountRegex = /^.*([\s|\$|\-]\d+[,|.]\d+).*$/gm;
-        var config = appConfig.getAppConfig();
 
         //3- Finalmente tengo que parsear el texto para ofrecer las coincidencias
         //this.parseFile = function (fileId, then) {
@@ -136,8 +144,8 @@ angular.module('e-invoice.services')
                 });
             }
 
-            for (var i = 0; i < config.names.length; i++) {
-                var nameRegex = new RegExp("^.*(" + config.names[i] + ").*$", "gm");
+            for (var i = 0; i < config.appConfig.names.length; i++) {
+                var nameRegex = new RegExp("^.*(" + config.appConfig.names[i] + ").*$", "gm");
                 m = nameRegex.exec(text);
                 if (m != null) {
                     obj.names.push({

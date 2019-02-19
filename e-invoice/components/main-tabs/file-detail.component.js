@@ -31,7 +31,8 @@ angular
                 lucky: {},
                 zoom: {},
                 tags: {},
-                rename: {}
+                rename: {},
+                renameDate: {}
             };
 
             $scope.loading = function (enable) {
@@ -211,7 +212,7 @@ angular
 
             this.newOrigin = function (newOrigin) {
                 textDiscovery.createOrigin(newOrigin).then(function (origin) {
-                    ctrl.selectedOrigin = origin;
+                    ctrl.selectedOrigin = newOrigin;
                 }, function (err) {
                     console.log(err);
                 });
@@ -225,8 +226,8 @@ angular
                 console.log("submit");
             };
 
-            $scope.actions.save.action = function ($event) {
-                appConfig.folder(new Date(ctrl.expirationDate).getFullYear(), function (folderId) {
+            $scope.actions.save.action = function () {
+                appConfig.folder(new Date(ctrl.expirationDate).getFullYear(), function () {
                     var params = {
                         fileId: $scope.detail.id,
                         name: $scope.detail.name,
@@ -242,24 +243,24 @@ angular
                     GApi.execute('drive', 'files.update', params).then(function (resp) {
                         $rootScope.$broadcast("file-updated", resp);
                         $scope.refresh();
-                    }, function () {
-                        //ha ocurrido un error
+                    }, function (err) {
+                        console.log(err)
                     });
                 });
             };
 
-            $scope.actions.save.disabled = function ($event) {
+            $scope.actions.save.disabled = function () {
                 if (!$scope.detail) {
                     return true;
                 }
                 return false;
             };
 
-            $scope.actions.save.visibility = function ($event) {
+            $scope.actions.save.visibility = function () {
                 return true;
             };
 
-            $scope.actions.archive.action = function ($event) {
+            $scope.actions.archive.action = function () {
                 appConfig.folder(new Date(ctrl.expirationDate).getFullYear(), function (folderId) {
                     var params = {
                         fileId: $scope.detail.id,
@@ -301,8 +302,8 @@ angular
                     fileId: $scope.detail.id
                 }).then(function (resp) {
                     $scope.detail = null;
-                }, function () {
-                    //ha ocurrido un error
+                }, function (err) {
+                    console.log(err);
                 });
             };
 
@@ -327,6 +328,11 @@ angular
                     return "mode_edit";
                 }
                 return "border_color";
+            };
+
+            $scope.actions.renameDate.action = function ($event) {
+                var name = $scope.detail.name;
+                $scope.detail.name = moment(ctrl.expirationDate).format("YYYYMMDD-")+name;
             };
         }
     });

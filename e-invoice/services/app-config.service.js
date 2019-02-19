@@ -10,10 +10,8 @@ var defaultConfig = {
     "language": "en",
     "names": ["Fibertel", "Edenor", "AySA", "Personal", "Municipio de Hurlingham", "OSDE", "Plan Rombo", "Movistar", "Gas Natural Fenosa", "Victoria Seguros", "Inst. Cristo Obrero", "Telefónica", "ARBA Automotor", "ARBA Inmobiliario", "Cablevisión"]
 };
-
-
 angular.module('e-invoice.services')
-    .service("appConfig", ['GAuth', 'GApi', '$rootScope', '$q', function (GAuth, GApi, $rootScope, $q) {
+    .service("appConfig",function (GAuth, GApi, $rootScope, $q) {
         return {
             getAppConfig: getAppConfig,
             loadFolders: loadFolders,
@@ -24,25 +22,38 @@ angular.module('e-invoice.services')
 
         function getAppConfig() {
             var _this = this;
-            if (_this.appConfig) {
-                return _this.appConfig;
-            }
             var defered = $q.defer();
-            //var gapi = GApi;
+            if (_this.appConfig) {
+                setTimeout(function(){
+                    defered.resolve(_this.appConfig);
+                },1000);
+                return defered.promise;
+            }
             var appData = gdad('config.json', '825440913711-gjoh3rbtrsnt5mapedf9dn2kumv247m7.apps.googleusercontent.com');
             appData.read().then(function (data) {
                 if (!data) {
                     appData.save(defaultConfig).then(function (data) {
                         _this.appConfig = data;
-                        _this.loadFolders();
-                        defered.resolve(data);
+                        _this.loadFolders().then(
+                            function(folders){
+                                _this.folders = folders;
+                                defered.resolve(_this);
+                                _this.appStarted = true;
+                            }, function (err) {
+                                defered.reject(err);
+                            })
+                    });
+                }
+                                                     
+                _this.appConfig = data;
+                _this.loadFolders()
+                    .then(function(folders){
+                        _this.folders = folders;
+                        _this.appStarted = true;
+                        defered.resolve(_this);
                     }, function (err) {
                         defered.reject(err);
                     });
-                }
-                _this.appConfig = data;
-                _this.loadFolders();
-                defered.resolve(data);
             }, function (err) {
                 defered.reject(err);
             });
@@ -61,6 +72,7 @@ angular.module('e-invoice.services')
 
         function loadFolders() {
             var _this = this;
+            var defered = $q.defer();
             var _q = "mimeType = 'application/vnd.google-apps.folder'";
             _q += " and name = '" + _this.appConfig.folder + "'";
             GApi.execute('drive', 'files.list', {
@@ -78,15 +90,17 @@ angular.module('e-invoice.services')
                         for (var i = 0; i < resp.files.length; i++) {
                             _this.folders.push(resp.files[i].id);
                         }
-                        _this.appStarted = true;
+                        defered.resolve(_this.folders);
                     }, function () {
-                        console.log('error :(');
+                        //console.log('error :(');
+                        defered.reject("Error obteniendo las carpetas");
                     });
                 }
                 //defered.reject("Error");
-            }, function (err) {
-                console.log('error :(');
+            }, function () {
+                console.log('Error listando las carpetas');
             });
+            return defered.promise;
         }
 
         function isInFolders(parents) {
@@ -104,8 +118,13 @@ angular.module('e-invoice.services')
 
         function folder(folderName, then) {
             var _this = this;
+            var _q = "mimeType = 'application/vnd.google-apps.folder' and name='" + folderName+"'";
+            _q += " and '" + _this.folderId + "' in parents";
+            _q += " and trashed=false";
+
             var params = {
-                q: "mimeType = 'application/vnd.google-apps.folder' and name='" + folderName + "' and '" + _this.folderId + "' in parents and trashed=false"
+                //q: "mimeType = 'application/vnd.google-apps.folder' and name='" + folderName + " and trashed=false"
+                q: _q
             }
             GApi.execute('drive', 'files.list', params).then(function (resp) {
                 if (resp.files.length === 1 && then) {
@@ -135,11 +154,12 @@ angular.module('e-invoice.services')
 
         function saveConfig() {
             var deferred = $q.defer();
+            var appData = gdad('config.json', '825440913711-gjoh3rbtrsnt5mapedf9dn2kumv247m7.apps.googleusercontent.com');
             appData.save(this.appConfig).then(function (data) {
                 deferred.resolve(data);
             }, function (err) {
                 deferred.reject(err);
             });
             return deferred.promise;
-        };
-    }]);
+        }
+    });

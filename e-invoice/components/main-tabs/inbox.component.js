@@ -26,17 +26,33 @@ function InboxController($scope, $rootScope, $element, GAuth, GApi, $mdDialog, a
 
     }
 
-    $scope.$on("refresh", function (evt) {
+    $scope.$on("refresh", function () {
         $scope.refresh();
     });
+    
+    //appConfig.getAppConfig().then(function(config){
+    //    $scope.config = config;
+    //},function(){
+    //    console.log("Ocurrió un erro cargando la configuracion");
+    //});
 
-    $scope.$on("start-app", function (evt) {
-        $scope.folderId = appConfig.folderId;
+    $rootScope.$on("start-app", function () {
+        appConfig.getAppConfig().then(function(config){
+            $scope.config = config;
+        },function(){
+            console.log("Ocurrió un error obteniendo la configuración")
+        });
     });
-    $scope.folderId = appConfig.folderId;
 
     $scope.$watch('files', function () {
-        $scope.upload($scope.files, $scope.folderId);
+        if(!$scope.files || $scope.files.length === 0){
+            return;
+        }
+        if($scope.config == null){
+            
+        }else{
+            $scope.upload($scope.files, $scope.config.folderId);
+        }
     });
 
     $scope.upload = function (files, folderId) {
@@ -66,7 +82,6 @@ function InboxController($scope, $rootScope, $element, GAuth, GApi, $mdDialog, a
         }
     }
 
-
     GAuth.checkAuth().then(function () {
         $scope.refresh();
     });
@@ -79,9 +94,9 @@ function InboxController($scope, $rootScope, $element, GAuth, GApi, $mdDialog, a
  * @param {Function} callback Function to call when the request is complete.
  */
 function insertFile(fileData, parent, callback) {
-    const boundary = '-------314159265358979323846';
-    const delimiter = "\r\n--" + boundary + "\r\n";
-    const close_delim = "\r\n--" + boundary + "--";
+    var boundary = '-------314159265358979323846';
+    var delimiter = "\r\n--" + boundary + "\r\n";
+    var close_delim = "\r\n--" + boundary + "--";
 
     var reader = new FileReader();
     reader.readAsBinaryString(fileData);
@@ -89,7 +104,8 @@ function insertFile(fileData, parent, callback) {
         var contentType = fileData.type || 'application/octet-stream';
         var metadata = {
             'name': fileData.name,
-            'mimeType': contentType
+            'mimeType': contentType,
+            'parents': [parent]
         };
 
         var base64Data = btoa(reader.result);
@@ -110,9 +126,9 @@ function insertFile(fileData, parent, callback) {
             'params': {
                 'uploadType': 'multipart'
             },
-            name: fileData.name,
-            parents: [parent],
-            originalFileName: fileData.name,
+            'name': fileData.name,
+            'parents': [{'id':parent}],
+            'originalFileName': fileData.name,
             'headers': {
                 'Content-Type': 'multipart/mixed; boundary="' + boundary + '"'
             },

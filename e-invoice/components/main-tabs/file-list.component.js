@@ -211,8 +211,11 @@ angular
                                     ctrl.counter.loaded = _this.numLoaded_;
                                     ctrl.counter.hasMore = $scope.loading;
                                 }
-                            }(this), function () {
-                                console.log('error :(');
+                            }(this), function (err) {
+                                if(err.code == 401){
+                                   
+                                }
+                                console.log('error :( consultadno la lista');
                             });
                     }
                 }
