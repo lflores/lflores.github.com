@@ -145,11 +145,12 @@ angular.module('e-invoice.services')
             }
 
             for (var i = 0; i < config.appConfig.names.length; i++) {
-                var nameRegex = new RegExp("^.*(" + config.appConfig.names[i] + ").*$", "gm");
+                var nameRegex = new RegExp("^.*(" + config.appConfig.names[i] + ").*$", "igm");
                 m = nameRegex.exec(text);
                 if (m != null) {
                     obj.names.push({
-                        name: m[1],
+                        _name: m[1],
+                        name: config.appConfig.names[i],
                         text: m[0]
                     });
                 }
