@@ -1,0 +1,600 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "$id": "http://bancoop.com/schemas/middleware.schema.json",
+    "definitions": {
+        "traceId": {
+            "type": "string",
+            "description": "A UUID string used for tracing purposes.",
+            "pattern": "[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}",
+            "examples": [
+                "0a6baba2-a7eb-4069-b6dc-1192d22c0718",
+                "5a882cf0-853e-4d29-a243-89f6385ec3e8",
+                "13607291-d7b9-4b8a-b6c9-a6c093ea47cc",
+                "4ae85dfa-685a-4756-951e-4019414648e3"
+            ]
+        },
+        "routeId": {
+            "type": "string",
+            "description": "A unique number used to route traffic in the middleware.",
+            "pattern": "^[a-zA-Z0-9\\-\\_]{1,32}$",
+            "examples": [
+                "VPL-PR",
+                "VPL-US",
+                "VPL-AR",
+                "REST-API",
+                "TCP-IP-API"
+            ]
+        },
+        "institutionId": {
+            "type": "string",
+            "description": "A unique number representing the financial institution.",
+            "pattern": "^[a-zA-Z0-9]{3,15}$",
+            "examples": [
+                "AA01",
+                "BB01232424",
+                "cc012265567424",
+                "DD0123424ghjgj",
+                "kk0123242fsada4"
+            ]
+        },
+        "institutionName": {
+            "type": "string",
+            "description": "A unique name description, representing the banking institution.",
+            "pattern": "^[\\w\\s\\d]{1,50}$",
+            "examples": [
+                "Cooperativa de Caguas",
+                "COOP PADRE SALVADOR RUFFOLO PARROCOOP"
+            ]
+        },
+        "customerId": {
+            "type": "string",
+            "description": "A unique number representing the client in the banking application. ",
+            "pattern": "^[a-zA-Z0-9]{1,25}$"
+        },
+        "customerIdType": {
+            "description": "The type of identifcation used for the customer ID.",
+            "type": "string",
+            "enum": [
+                "SSN",
+                "TAX_ID"
+            ]
+        },
+        "accountId": {
+            "type": "string",
+            "description": "A unique number representing the client in the banking application. ",
+            "pattern": "^[a-zA-Z0-9]{1,30}$"
+        },
+        "accountType": {
+            "description": "The type of account to identify the number.",
+            "type": "string",
+            "enum": [
+                "CREDIT_CARD",
+                "DEBIT_CARD"
+            ]
+        },
+        "status": {
+            "type": "string",
+            "description": "A enum value that states the account status in a standardized way.",
+            "enum": [
+                "ACTIVE",
+                "INACTIVE"
+            ]
+        },
+        "countryCode": {
+            "type": "string",
+            "description": "A two-letter ISO country code.",
+            "pattern": "^[A-Z]{2}$",
+            "examples": [
+                "US",
+                "PR",
+                "AR",
+                "AT"
+            ]
+        },
+        "currencyValue": {
+            "type": "number",
+            "description": "Define a currency value format"
+        },
+        "currencyType": {
+            "type": "string",
+            "description": "A three-letter ISO 4217 currency.",
+            "pattern": "^[A-Z]{3}$",
+            "examples": [
+                "USD",
+                "EUR",
+                "AUD",
+                "ARS"
+            ]
+        },
+        "description": {
+            "type": "string",
+            "description": "A short description about the transaction.",
+            "pattern": "^[A-Za-z\\d\\s\\-]{1,100}$"
+        },
+        "objectType": {
+            "type": "string",
+            "enum": [
+                "Institution",
+                "InstitutionStatus",
+                "BaseAccount",
+                "CreditCardDetails",
+                "BaseTransaction",
+                "Transaction",
+                "InstitutionProfile",
+                "CardControlResponse",
+                "Customer"
+            ]
+        },
+        "transactionType": {
+            "type": "string",
+            "description": "Represents the type of transaction.",
+            "enum": [
+                "DEBIT",
+                "CREDIT"
+            ]
+        },
+        "calendarDate": {
+            "type": "string",
+            "description": "An ISO 8601 calendar date format. (YYYY-MM-DD)",
+            "pattern": "\\d{4}-\\d{2}-\\d{2}$",
+            "examples": [
+                "2021-08-26",
+                "2021-06-15",
+                "2020-10-18"
+            ]
+        },
+        "expirationDate": {
+            "type": "string",
+            "description": "An ISO 8601 short calendar month format. (YYYY-MM)",
+            "pattern": "\\d{4}-\\d{2}$",
+            "examples": [
+                "2021-08",
+                "2021-06",
+                "2020-10",
+                "2024-11",
+                "2022-07"
+            ]
+        },
+        "address": {
+            "type": "object",
+            "properties": {
+                "address1": {
+                    "type": "string",
+                    "description": "Address line 1",
+                    "pattern": "^[a-zA-Z0-9 -]{0,64}$"
+                },
+                "address2": {
+                    "type": "string",
+                    "description": "Address line 2",
+                    "pattern": "^[a-zA-Z0-9 -]{0,64}$"
+                },
+                "city": {
+                    "type": "string",
+                    "description": "Customer's city",
+                    "pattern": "^[a-zA-Z0-9 -]{0,64}$"
+                },
+                "state": {
+                    "type": "string",
+                    "description": "The country state. Applies to US addresses only.",
+                    "pattern": "^[a-zA-Z0-9 -]{0,10}$"
+                },
+                "country": {
+                    "type": "string",
+                    "$ref": "#/definitions/countryCode"
+                },
+                "postalCode": {
+                    "type": "string",
+                    "description": "The zip or postal code assigned to the card.",
+                    "pattern": "^[0-9]{5}$"
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "address1",
+                "country",
+                "postalCode"
+            ]
+        },
+        "phoneNumber": {
+            "type": "string",
+            "description": "E.164 format phone number.",
+            "pattern": "^\\+?[\\d\\-\\s]{1,20}$"
+        },
+        "email": {
+            "type": "string",
+            "description": "A valid customer email",
+            "pattern": "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$"
+        },
+        "cardAction": {
+            "title": "Action to perform",
+            "description": "The desired action to perform on the card.",
+            "type": "string",
+            "enum": [
+                "LOCK",
+                "UNLOCK"
+            ]
+        },
+        "implementedServices": {
+            "type": "array",
+            "items": {
+                "type": "string",
+                "enum": [
+                    "ListInstitutionStatus",
+                    "GetCustomerInformationInquiry",
+                    "GetAccountDetails",
+                    "ListCustomerInstitutions",
+                    "ListCustomerAccounts",
+                    "ListInProcessTransactions",
+                    "ListTransactions",
+                    "CardTemporaryBlock",
+                    "CardActivation",
+                    "InstitutionsProfile"
+                ]
+            }
+        },
+        "error": {
+            "type": "object",
+            "properties": {
+                "traceId": {
+                    "type": "string",
+                    "description": "The trace that dispached the error",
+                    "$ref": "#/definitions/traceId"
+                },
+                "code": {
+                    "type": "integer",
+                    "description": "Code that indicates the type of error",
+                    "enum": [
+                        400,
+                        401,
+                        403,
+                        404,
+                        422,
+                        500
+                    ]
+                },
+                "error": {
+                    "type": "string",
+                    "description": "",
+                    "examples": [
+                        "400 Bad Request",
+                        "401 Unauthorized",
+                        "403 Forbidden",
+                        "404 Method not found",
+                        "422 Unprocessable Entity",
+                        "500 Internal Server Error"
+                    ]
+                },
+                "message": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "traceId",
+                "code",
+                "message"
+            ]
+        },
+        "baseAccountObject": {
+            "type": "object",
+            "properties": {
+                "object": {
+                    "type": "string",
+                    "description": "The object type being returned.",
+                    "$ref": "#/definitions/objectType"
+                },
+                "accountId": {
+                    "type": "string",
+                    "description": "A unique number that represents the account that is being returned.",
+                    "$ref": "#/definitions/accountId"
+                },
+                "lastFourDigits": {
+                    "type": "string",
+                    "description": "The last four (4) digit of the plain text account number.",
+                    "pattern": "^[0-9]{4}$"
+                },
+                "accountType": {
+                    "type": "string",
+                    "description": "A enum value that describes at a high level the type of account that is being returned.",
+                    "$ref": "#/definitions/accountType"
+                },
+                "accountStatus": {
+                    "type": "string",
+                    "description": "A enum value that states the account status in a standardized way.",
+                    "enum": [
+                        "ACTIVE",
+                        "INACTIVE"
+                    ]
+                },
+                "balance": {
+                    "description": "The account balance.",
+                    "$ref": "#/definitions/currencyValue"
+                },
+                "productId": {
+                    "type": "string",
+                    "description": "A product's identifier.",
+                    "pattern": "^[a-zA-Z0-9-, ]{1,32}$"
+                },
+                "productName": {
+                    "type": "string",
+                    "description": "A product name description.",
+                    "pattern": "^[a-zA-Z0-9-, ]{1,32}$"
+                },
+                "country": {
+                    "type": "string",
+                    "description": "A two-letter ISO 3166 Alpha 2-code country code. https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes",
+                    "$ref": "#/definitions/countryCode"
+                },
+                "currency": {
+                    "description": "A three-letter ISO currency. https://en.wikipedia.org/wiki/ISO_4217",
+                    "$ref": "#/definitions/currencyType"
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "object",
+                "accountId",
+                "lastFourDigits",
+                "accountType",
+                "accountStatus",
+                "balance",
+                "country",
+                "currency"
+            ]
+        },
+        "baseTransactionObject": {
+            "properties": {
+                "object": {
+                    "type": "string",
+                    "description": "The object type being returned.",
+                    "$ref": "#/definitions/objectType"
+                },
+                "id": {
+                    "type": "string",
+                    "description": "A unique number that represents the account that is being returned.",
+                    "pattern": "^[a-zA-Z0-9\\-]{1,64}$"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "Represents the type of transaction.",
+                    "$ref": "#/definitions/transactionType"
+                },
+                "amount": {
+                    "description": "The transaction positive amount.",
+                    "$ref": "#/definitions/currencyValue"
+                },
+                "country": {
+                    "type": "string",
+                    "description": "A two-letter ISO 3166 Alpha 2-code country code. https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes",
+                    "$ref": "#/definitions/countryCode"
+                },
+                "currency": {
+                    "description": "A three-letter ISO 4217 currency. https://en.wikipedia.org/wiki/ISO_4217",
+                    "$ref": "#/definitions/currencyType"
+                },
+                "date": {
+                    "description": "ISO 8601 date format when the transaction was made.",
+                    "$ref": "#/definitions/calendarDate"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "A short description about the transaction.",
+                    "$ref": "#/definitions/description"
+                },
+                "merchantCategoryCode": {
+                    "type": "string",
+                    "description": "Four digit (MCC) code that identifies the type of business.",
+                    "pattern": "^[0-9]{4}$"
+                },
+                "merchantCategoryDescription": {
+                    "type": "string",
+                    "description": "A merchant category description, that identifies the type of business in words.",
+                    "$ref": "#/definitions/description"
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "object",
+                "id",
+                "type",
+                "amount",
+                "country",
+                "currency",
+                "date",
+                "description"
+            ]
+        },
+        "creditCardDetailsObject": {
+            "properties": {
+                "object": {
+                    "type": "string",
+                    "description": "Represents the object type being returned.",
+                    "$ref": "#/definitions/objectType"
+                },
+                "cardNumber": {
+                    "type": "string",
+                    "description": "A plain text representation of the card number.",
+                    "pattern": "[0-9]{13,19}$"
+                },
+                "cardEmbossedName": {
+                    "type": "string",
+                    "description": "The name stamped to the physical card.",
+                    "pattern": "^[a-zA-Z -]{1,64}$"
+                },
+                "cardStatus": {
+                    "description": "A enum value that states the card status",
+                    "type": "string",
+                    "enum": [
+                        "ACTIVE",
+                        "INACTIVE"
+                    ]
+                },
+                "isBlocked": {
+                    "type": "boolean",
+                    "description": "Indicates if the card has a temporary lock or not"
+                },
+                "currentBalance": {
+                    "description": "The current posted balance of the card. ",
+                    "$ref": "#/definitions/currencyValue"
+                },
+                "availableCredit": {
+                    "description": "Represents the credit amount that the customer can freely spend.",
+                    "$ref": "#/definitions/currencyValue"
+                },
+                "creditLimit": {
+                    "description": "The maximum amount of credit credit line.",
+                    "$ref": "#/definitions/currencyValue"
+                },
+                "minimumPaymentDueAmount": {
+                    "description": "The minimum payment amount.",
+                    "$ref": "#/definitions/currencyValue"
+                },
+                "paymentDueDate": {
+                    "description": "The last date to make a payment",
+                    "$ref": "#/definitions/calendarDate"
+                },
+                "nextClosingDate": {
+                    "description": "The next statement closing date.",
+                    "$ref": "#/definitions/calendarDate"
+                },
+                "previousClosingDate": {
+                    "description": "The previous statement closing date.",
+                    "$ref": "#/definitions/calendarDate"
+                },
+                "cardExpirationDate": {
+                    "description": "The date that the card expires.",
+                    "$ref": "#/definitions/expirationDate"
+                },
+                "postalCode": {
+                    "description": "The zip or postal code assigned to the card.",
+                    "pattern": "^[0-9]{5}$"
+                }
+            },
+            "required": [
+                "object",
+                "cardNumber",
+                "cardEmbossedName",
+                "cardStatus",
+                "currentBalance",
+                "availableCredit",
+                "creditLimit",
+                "cardExpirationDate",
+                "postalCode"
+            ],
+            "additionalProperties": false
+        },
+        "institutionStatusObject": {
+            "properties": {
+                "object": {
+                    "type": "string",
+                    "description": "The object type being returned.",
+                    "$ref": "#/definitions/objectType"
+                },
+                "institutionId": {
+                    "type": "string",
+                    "description": "A unique number representing the financial institution.",
+                    "$ref": "#/definitions/institutionId"
+                },
+                "institutionName": {
+                    "type": "string",
+                    "description": "A unique name description, representing the banking institution.",
+                    "$ref": "#/definitions/institutionName"
+                },
+                "status": {
+                    "type": "string",
+                    "description": "A enum value that states the account status in a standardized way.",
+                    "enum": [
+                        "ACTIVE",
+                        "INACTIVE"
+                    ]
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "object",
+                "institutionId",
+                "institutionName",
+                "status"
+            ]
+        },
+        "ListInstitutionStatusResponse": {
+            "$id": "http://bancoop.com/middleware/schemas/ListInstitutionStatusResponse",
+            "description": "The response payload structure definition for the 'ListInstitutionStatus' service.",
+            "title": "List Institution Status - Response",
+            "type": "object",
+            "properties": {
+                "traceId": {
+                    "type": "string",
+                    "description": "A UUID string used for tracing purposes.",
+                    "$ref": "#/definitions/traceId"
+                },
+                "data": {
+                    "type": "array",
+                    "additionalItems": true,
+                    "items": {
+                        "type": "object",
+                        "$ref": "#/definitions/institutionStatusObject"
+                    }
+                },
+                "errors": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/error"
+                    }
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "traceId"
+            ],
+            "anyOf": [{
+                    "required": [
+                        "data"
+                    ]
+                },
+                {
+                    "required": [
+                        "errors"
+                    ]
+                }
+            ]
+        },
+        "GetAccountDetailsResponse": {
+            "$id": "http://bancoop.com/middleware/schemas/GetAccountDetailsResponse",
+            "type": "object",
+            "title": "Get Account Details - Response",
+            "description": "The response payload structure for the 'GetAccountDetails' service.",
+            "properties": {
+                "traceId": {
+                    "type": "string",
+                    "description": "A UUID string used for tracing purposes.",
+                    "$ref": "#/definitions/traceId"
+                },
+                "data": {
+                    "type": "object",
+                    "$ref": "#/definitions/creditCardDetailsObject"
+                },
+                "errors": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/error"
+                    }
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "traceId"
+            ],
+            "anyOf": [{
+                    "required": [
+                        "data"
+                    ]
+                },
+                {
+                    "required": [
+                        "errors"
+                    ]
+                }
+            ]
+        }
+    }
+}
